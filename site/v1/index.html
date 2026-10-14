@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ru" data-variant="v1" data-theme="light" data-theme-toggle>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Вариант 1 — Исходная версия · APELSIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('v1-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>
+:root{
+  --bg:#f7f4ef; --fg:#161616; --muted:#5a6170; --card:#fff; --line:rgba(22,22,22,.1); --chip:#efebe4;
+  --accent:#ff9500; --header:rgba(255,255,255,.96); --stat:linear-gradient(135deg,#fff 0%,#fff 45%,#fdf1e2 100%);
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Manrope",system-ui,sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#000; --fg:#fff; --muted:#b8c0cc; --card:#0a0a0a; --line:rgba(255,255,255,.08); --chip:#141414;
+  --header:rgba(0,0,0,.92); --stat:linear-gradient(135deg,#0d0d0d 0%,#0a0a0a 60%,#1a1206 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font:400 15px/1.6 var(--sans);transition:background .3s,color .3s}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:min(1136px,calc(100% - 48px));margin:0 auto}
+.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em}
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 28px;border-radius:999px;font-weight:500;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-acc{background:var(--accent);color:#161616}
+.btn-dark{background:rgba(10,10,10,.6);color:#fff;border:1px solid rgba(255,255,255,.35)}
+/* header */
+header{position:sticky;top:0;z-index:50;background:var(--header);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{height:80px;display:flex;align-items:center;gap:28px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo img{width:34px;height:34px}
+.logo b{display:block;font:500 17px/1 var(--serif);letter-spacing:.18em}
+.logo small{display:block;color:var(--accent);font-size:9px;letter-spacing:.3em;margin-top:3px}
+nav.main{display:flex;gap:28px;font-size:14px}
+nav.main a:hover{color:var(--accent)}
+.hd-r{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px}
+.pill{height:36px;padding:0 14px;border:1px solid var(--line);border-radius:999px;display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.pill-cta{background:var(--accent);color:#161616;border:0;font-weight:600}
+/* hero */
+.hero{position:relative;height:820px;display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.45) 60%,rgba(0,0,0,.85))}
+.hero-c{position:relative;z-index:1;max-width:640px;display:grid;justify-items:center;gap:20px}
+.hero h1{font-size:64px;line-height:1.15}
+.hero p{color:rgba(255,255,255,.85);font-size:16px}
+.hero .row{display:flex;gap:12px;margin-top:8px}
+.scroll{margin-top:24px;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.7)}
+/* stats */
+.stats{padding:56px 0;border-bottom:1px solid var(--line)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{background:var(--stat);border:1px solid var(--line);border-radius:12px;padding:28px 24px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.stat b{display:block;font:500 32px/1 var(--serif)}
+.stat span{display:block;margin-top:10px;color:var(--muted);font-size:14px}
+/* portfolio */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+.sec-h h2{font-size:40px;line-height:1.2;margin:14px 0 12px;max-width:520px}
+.sec-h p{color:var(--muted)}
+.flag{margin-top:48px}
+.flag-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px}
+.flag-top h3{font-size:30px;margin:10px 0 6px}
+.meta{display:flex;gap:12px;color:var(--muted);font-size:12px}
+.ghost{height:42px;padding:0 20px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);display:inline-flex;align-items:center;gap:8px;font-size:14px}
+.flag-body{display:grid;grid-template-columns:752px 1fr;gap:20px}
+.gal-main{border-radius:12px;overflow:hidden;aspect-ratio:752/470;background:var(--chip)}
+.gal-main img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.thumbs button{border:2px solid transparent;border-radius:8px;overflow:hidden;aspect-ratio:1;cursor:pointer;background:none;padding:0;opacity:.75}
+.thumbs button.on{border-color:var(--accent);opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.flag-side p{color:var(--muted);font-size:14px;margin-bottom:22px}
+.flag-side .btn{width:100%;justify-content:center}
+/* album */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 24px}
+.tabs button{all:unset;cursor:pointer;height:36px;padding:0 16px;border-radius:999px;background:var(--chip);font-size:14px;color:var(--muted);display:inline-flex;align-items:center}
+.tabs button.on{background:var(--accent);color:#161616;font-weight:500}
+.album{display:grid;grid-template-columns:846px 1fr;gap:24px}
+.viewer{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.06);border:1px solid var(--line)}
+.sheet{aspect-ratio:846/530;background:#fff;display:grid;place-items:center}
+.sheet img{max-height:100%;object-fit:contain}
+.vnav{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;border-top:1px solid var(--line);font-size:14px}
+.vnav button{all:unset;cursor:pointer}
+.vnav button:disabled{opacity:.35;cursor:default}
+.strip{display:flex;gap:8px;padding:12px;overflow-x:auto;border-top:1px solid var(--line)}
+.strip button{flex:0 0 82px;height:56px;border:2px solid transparent;border-radius:6px;overflow:hidden;background:#fff;cursor:pointer;padding:0}
+.strip button.on{border-color:var(--accent)}
+.strip img{width:100%;height:100%;object-fit:cover}
+.side{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column}
+.side p{color:var(--muted);font-size:14px;margin-top:12px}
+.sheets{margin-top:auto;display:grid;gap:6px;max-height:190px;overflow:auto}
+.sheets button{all:unset;cursor:pointer;padding:7px 12px;border-radius:999px;background:var(--chip);font-size:13px}
+.sheets button i{font-style:normal;color:var(--accent);margin-right:10px}
+.sheets button.on{background:rgba(255,149,0,.18)}
+/* more */
+.more-g{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}
+.card{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:363/420;color:#fff}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover img{transform:scale(1.04)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.7))}
+.card div{position:absolute;left:20px;bottom:18px;z-index:1}
+.card b{display:block;font:500 20px var(--serif)}
+.card small{opacity:.8;font-size:12px}
+.tag{position:absolute;left:14px;top:14px;z-index:1;padding:5px 12px;border-radius:999px;background:rgba(0,0,0,.6);font-size:12px}
+.all{display:inline-block;margin-top:24px;color:var(--accent);font-size:14px}
+/* footer */
+footer{padding:56px 0 28px;background:var(--bg)}
+.ft{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+.ft h4{font:500 22px var(--serif);margin:18px 0 10px}
+.ft p,.ft li{color:var(--muted);font-size:14px;list-style:none;margin-bottom:8px}
+.ft .cap{color:var(--accent);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.ft-b{display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.wa{position:fixed;right:28px;bottom:28px;width:48px;height:48px;border-radius:50%;background:#25d366;display:grid;place-items:center;z-index:40;box-shadow:0 8px 20px rgba(37,211,102,.35)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="#"><img src="../assets/img/logo-icon.png" alt=""><span><b>APELSIN</b><small>INTERIOR</small></span></a>
+    <nav class="main"><a href="#portfolio">Портфолио</a><a href="#">Услуги</a><a href="#">Ремонт</a><a href="#">Пакеты</a><a href="#">Расчёт</a><a href="#">Студия</a><a href="#footer">Контакты</a></nav>
+    <div class="hd-r"><span class="pill">в Алматы ⌄</span><a class="pill" href="tel:+77770239748">+7 777 023 97 48</a><a class="pill pill-cta" href="#">Рассчитать проект</a></div>
+  </div>
+</header>
+
+<div class="hero">
+  <img src="../assets/img/hero-interior.jpg" alt="Интерьер гостиной, проект в Атырау">
+  <div class="hero-c">
+    <span class="eyebrow">APELSIN INTERIOR</span>
+    <h1>Студия премиального дизайна интерьера с реализацией под ключ</h1>
+    <p>Алматы · Казахстан · 10 лет · 200 000+ м² реализовано. Дизайн, 3D и ремонт — одна команда, полный контроль.</p>
+    <div class="row"><a class="btn btn-acc" href="#">Рассчитать проект →</a><a class="btn btn-dark" href="#portfolio">Смотреть работы</a></div>
+    <a class="scroll" href="#portfolio">СМОТРЕТЬ РАБОТЫ<br>⌄</a>
+  </div>
+</div>
+
+<div class="stats"><div class="wrap">
+  <div class="stat"><b>10</b><span>Лет на рынке</span></div>
+  <div class="stat"><b>200000+</b><span>м² реализовано</span></div>
+  <div class="stat"><b>8</b><span>Специалистов</span></div>
+  <div class="stat"><b>98%</b><span>Довольных клиентов</span></div>
+</div></div>
+
+<section id="portfolio"><div class="wrap">
+  <div class="sec-h"><span class="eyebrow">Портфолио</span><h2>Дизайн интерьера в Алматы — избранные проекты</h2><p>Визуализации, чертежи и реализованные интерьеры — без слов, на примерах.</p></div>
+  <div class="flag">
+    <div class="flag-top">
+      <div><span class="eyebrow">Флагманский проект</span><h3>Квартира · Атырау 70 м²</h3><div class="meta"><span>⌖ Атырау</span><span>70,52 м²</span><span>Минимализм</span></div></div>
+      <a class="ghost" href="#">⛶ 3D-прогулка</a>
+    </div>
+    <div class="flag-body">
+      <div>
+        <div class="gal-main"><img id="galMain" src="../assets/img/atyrau_living-room.jpg" alt="Гостиная"></div>
+        <div class="thumbs" id="thumbs">
+          <button class="on" data-src="atyrau_living-room"><img src="../assets/img/atyrau_living-room.jpg" alt="Гостиная"></button>
+          <button data-src="atyrau_kitchen"><img src="../assets/img/atyrau_kitchen.jpg" alt="Кухня"></button>
+          <button data-src="atyrau_hallway"><img src="../assets/img/atyrau_hallway.jpg" alt="Прихожая"></button>
+          <button data-src="atyrau_bedroom"><img src="../assets/img/atyrau_bedroom.jpg" alt="Спальня"></button>
+          <button data-src="atyrau_balcony"><img src="../assets/img/atyrau_balcony.jpg" alt="Балкон"></button>
+        </div>
+      </div>
+      <div class="flag-side"><p>Единый дизайн-проект квартиры: альбом чертежей + связанные PDF по зонам (гостиная, кухня, спальня, санузел, гардероб, прихожая) и 3D-визуализации.</p><a class="btn btn-acc" href="#">⤢ Смотреть работы</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Документация проекта</span><p style="color:var(--muted);margin-top:8px">Чертежи и листы альбома</p>
+  <div class="tabs"><button class="on">Обзор проекта</button><button>Гостиная</button><button>Кухня</button><button>Спальня</button><button>Прихожая</button><button>Гардероб</button><button>Ванная</button><button>Балкон</button><button>3D-визуализации</button></div>
+  <div class="album">
+    <div class="viewer">
+      <div class="sheet"><img id="sheet" src="../assets/img/drawings/001.jpg" alt="Лист альбома"></div>
+      <div class="vnav"><button id="prev">‹ Назад</button><span id="count">1 / 27</span><button id="next">Далее ›</button></div>
+      <div class="strip" id="strip"></div>
+    </div>
+    <aside class="side"><span class="eyebrow">Обзор проекта</span><p>Листайте альбом свайпом или стрелками. Планировки, развёртки стен, узлы и спецификации.</p><div class="sheets" id="sheets"></div></aside>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow" style="color:var(--muted)">Ещё проекты</span><h2 style="font-size:32px;margin-top:12px">Портфолио и реализованные проекты в Алматы</h2>
+  <div class="more-g">
+    <a class="card" href="#"><img src="../assets/img/atyrau_living-room.jpg" alt=""><div><b>Квартира · Атырау 70 м²</b><small>70,52 м² · Минимализм</small></div></a>
+    <a class="card" href="#"><span class="tag">⛶ 3D-тур</span><img src="../assets/img/portfolio_cafe_cafe-01.jpg" alt=""><div><b>Кафе с арочными нишами</b><small>коммерция · Hospitality</small></div></a>
+    <a class="card" href="#"><img src="../assets/img/portfolio_kv50_kv50-02.jpg" alt=""><div><b>Квартира КВ50</b><small>квартира · Минимализм</small></div></a>
+  </div>
+  <a class="all" href="#">Все проекты →</a>
+</div></section>
+
+<footer id="footer"><div class="wrap">
+  <div class="ft">
+    <div><a class="logo" href="#"><img src="../assets/img/logo-icon.png" alt=""><span><b>APELSIN</b><small>INTERIOR</small></span></a><h4>Контакты студии дизайна интерьера</h4><p>Студия премиального дизайна интерьера с реализацией под ключ. Создаём пространства, в которых хочется жить и работать.</p></div>
+    <ul><li class="cap">Навигация</li><li>Портфолио</li><li>Услуги</li><li>Ремонт</li><li>Пакеты</li><li>Расчёт</li><li>Студия</li><li>Контакты</li></ul>
+    <ul><li class="cap">Контакты</li><li>+7 777 023 97 48</li><li>hello@apelsin.design</li><li>Алматы, ул. Абая 150</li><li>Пн–Сб · 10:00 – 20:00</li></ul>
+  </div>
+  <div class="ft-b"><span>© 2026 APELSIN INTERIOR. Все права защищены.</span><span>Политика конфиденциальности · Almaty, Kazakhstan</span></div>
+</div></footer>
+<a class="wa" href="https://wa.me/77770239748" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Z"/></svg></a>
+
+<script>
+// gallery
+document.getElementById('thumbs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});document.getElementById('galMain').src='../assets/img/'+b.dataset.src+'.jpg';});
+// album
+(function(){var N=27,i=0,pad=function(n){return String(n).padStart(3,'0')},strip=document.getElementById('strip'),list=document.getElementById('sheets');
+for(var k=0;k<N;k++){strip.insertAdjacentHTML('beforeend','<button data-i="'+k+'"><img loading="lazy" src="../assets/img/drawings/'+pad(k+1)+'.jpg" alt=""></button>');list.insertAdjacentHTML('beforeend','<button data-i="'+k+'"><i>'+String(k+1).padStart(2,'0')+'</i>Лист '+(k+1)+'</button>');}
+function go(n){i=Math.max(0,Math.min(N-1,n));document.getElementById('sheet').src='../assets/img/drawings/'+pad(i+1)+'.jpg';document.getElementById('count').textContent=(i+1)+' / '+N;document.getElementById('prev').disabled=i===0;document.getElementById('next').disabled=i===N-1;[strip,list].forEach(function(c){c.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',+b.dataset.i===i)})});var t=strip.children[i];strip.scrollTo({left:t.offsetLeft-strip.clientWidth/2+41,behavior:'smooth'});}
+document.getElementById('prev').onclick=function(){go(i-1)};document.getElementById('next').onclick=function(){go(i+1)};
+[strip,list].forEach(function(c){c.addEventListener('click',function(e){var b=e.target.closest('button');if(b)go(+b.dataset.i)})});
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});go(0);})();
+</script>
+<script src="../assets/switcher.js"></script>
+</body>
+</html>

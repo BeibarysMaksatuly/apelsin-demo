@@ -1,0 +1,7 @@
+# Only the static demo site and its deploy workflow are published.
+/*
+!/site/
+!/.github/
+!/serve.mjs
+!/.gitignore
+!/README.md

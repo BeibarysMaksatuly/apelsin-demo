@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>APELSIN — варианты главной страницы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ef;--surface:#fff;--ink:#161616;--ink2:#5a6170;--line:#e2dcd2;--accent:#ff9500;--accent-deep:#c96f00}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 "Manrope",system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1280px,calc(100% - 96px));margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:32px 0}
+.logo{display:flex;align-items:center;gap:12px} .logo img{width:40px}
+.logo b{display:block;font:400 24px/1 "Cormorant Garamond",serif;letter-spacing:.12em} .logo small{display:block;font-weight:600;font-size:9px;letter-spacing:.42em;color:var(--accent-deep);margin-top:4px}
+header span{color:var(--ink2);font-size:13px}
+.intro{padding:72px 0 64px;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:end;border-bottom:1px solid var(--line)}
+.eyebrow{font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-deep)}
+h1{font:300 88px/1 "Cormorant Garamond",serif;letter-spacing:-.02em;margin-top:20px} h1 em{font-style:italic}
+.intro p{color:var(--ink2);font-size:17px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:64px 0 120px}
+.card{display:grid;gap:22px}
+.shot{position:relative;aspect-ratio:1440/1100;overflow:hidden;border-radius:6px;background:var(--surface);box-shadow:0 1px 0 var(--line),0 20px 50px rgba(22,22,22,.08)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.card:hover .shot img{transform:scale(1.03)}
+.num{position:absolute;left:20px;top:20px;width:44px;height:44px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-weight:600}
+.meta{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.meta h2{font:400 34px/1.1 "Cormorant Garamond",serif} .meta p{color:var(--ink2);font-size:15px;margin-top:8px;max-width:460px}
+.go{flex:none;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:14px;transition:background .2s}
+.card:hover .go{background:var(--accent);color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px} .tags span{font-size:12px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink2)}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink2);font-size:13px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><span class="logo"><img src="assets/img/logo-icon.png" alt=""><span><b>APELSIN</b><small>INTERIOR</small></span></span><span>Демо для обсуждения · главная страница</span></header>
+  <div class="intro">
+    <div><span class="eyebrow">Варианты главной страницы</span><h1>Четыре подхода —<br><em>выберите свой</em></h1></div>
+    <p>Мы собрали вашу главную страницу в четырёх вариантах: от текущей версии сайта до полного редизайна. Везде только ваш реальный контент — проекты, цены, команда. Переключаться между вариантами можно панелью внизу экрана.</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="v1/index.html"><div class="shot"><img src="assets/previews/v1.jpg" alt="Вариант 1"><span class="num">1</span></div>
+      <div class="meta"><div><h2>Исходная версия</h2><p>Ваш текущий сайт, аккуратно собранный заново. Есть светлая и тёмная тема.</p><div class="tags"><span>Как сейчас</span><span>Светлая / тёмная</span></div></div><span class="go">Открыть →</span></div></a>
+    <a class="card" href="v2/index.html"><div class="shot"><img src="assets/previews/v2.jpg" alt="Вариант 2"><span class="num">2</span></div>
+      <div class="meta"><div><h2>Новая структура</h2><p>Ваш фирменный стиль и шрифты, но перестроенная структура: проекты, услуги, этапы, пакеты, форма заявки.</p><div class="tags"><span>Ваш стиль</span><span>Новая структура</span></div></div><span class="go">Открыть →</span></div></a>
+    <a class="card" href="v3/index.html"><div class="shot"><img src="assets/previews/v3.jpg" alt="Вариант 3"><span class="num">3</span></div>
+      <div class="meta"><div><h2>Премиум editorial</h2><p>Полный редизайн в журнальном стиле: фото на всю ширину, крупная типографика, мозаика портфолио, альбом чертежей, команда.</p><div class="tags"><span>Полный редизайн</span><span>Журнальный стиль</span></div></div><span class="go">Открыть →</span></div></a>
+    <a class="card" href="v4/index.html"><div class="shot"><img src="assets/previews/v4.jpg" alt="Вариант 4"><span class="num">4</span></div>
+      <div class="meta"><div><h2>Альтернатива</h2><p>Другая концепция подачи: компактные блоки с фото, услуги карточками и калькулятор стоимости прямо на главной.</p><div class="tags"><span>Другая концепция</span><span>Калькулятор на главной</span></div></div><span class="go">Открыть →</span></div></a>
+  </div>
+  <footer><span>APELSIN INTERIOR · Алматы</span><span>Демо-версия. Страница не индексируется поисковиками.</span></footer>
+</div>
+<script src="assets/switcher.js"></script>
+</body>
+</html>

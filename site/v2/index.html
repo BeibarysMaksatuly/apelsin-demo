@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ru" data-variant="v2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Вариант 2 — Новая структура · APELSIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ef;--surface:#fff;--muted:#eee9e1;--ink:#161616;--ink2:#5a6170;--line:#e2dcd2;--accent:#ff9500;--accent-deep:#c96f00;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans)}
+a{color:inherit;text-decoration:none} img{display:block;max-width:100%}
+.wrap{width:min(1280px,calc(100% - 160px));margin:0 auto}
+.eyebrow{font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-deep)}
+h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.01em}
+h2{font-size:60px;line-height:1.05}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:.01em;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+.btn-acc{background:var(--accent);color:var(--ink)} .btn-ink{background:var(--ink);color:#fff} .btn-line{border:1px solid var(--ink)}
+section{padding:120px 0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
+.head h2{margin-top:16px;max-width:720px}
+/* header */
+header{position:sticky;top:0;z-index:30;background:rgba(247,244,239,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:96px}
+.logo{display:flex;align-items:center;gap:12px} .logo img{width:38px}
+.logo b{display:block;font:500 24px/1 var(--serif);letter-spacing:.06em} .logo small{display:block;font-weight:600;font-size:9px;letter-spacing:.42em;color:var(--accent-deep);margin-top:4px}
+nav{display:flex;gap:36px;font-weight:500;font-size:14px} nav a:hover{color:var(--accent-deep)}
+.hd-r{display:flex;align-items:center;gap:24px;font-weight:600;font-size:14px}
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 700px;gap:72px;padding:72px 0 0 80px}
+.hero-t{padding-top:56px;display:grid;align-content:start;gap:32px}
+.hero h1{font-size:96px;line-height:.96;letter-spacing:-.02em}
+.hero p{color:var(--ink2);font-size:18px;max-width:500px}
+.hero .row{display:flex;gap:14px}
+.trust{display:flex;align-items:center;gap:12px;color:var(--ink2);font-weight:500;font-size:14px;padding-top:24px}
+.trust i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.hero-img{position:relative;height:760px}
+.hero-img img{width:100%;height:100%;object-fit:cover;border-top-left-radius:6px}
+.tagc{position:absolute;left:40px;bottom:40px;background:var(--surface);padding:20px 24px;border-radius:4px}
+.tagc small{font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-deep)}
+.tagc b{display:block;font:400 26px var(--serif)} .tagc span{color:var(--ink2);font-size:13px}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);padding:72px 80px}
+.stats div+div{border-left:1px solid var(--line);padding-left:40px}
+.stats b{display:block;font:300 64px/1 var(--serif)} .stats span{color:var(--ink2);font-weight:500;font-size:14px}
+/* projects */
+.pc{display:grid;gap:18px}
+.pc .im{overflow:hidden;border-radius:4px;background:var(--muted)}
+.pc img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.pc:hover img{transform:scale(1.04)}
+.pc .mt{display:flex;justify-content:space-between;align-items:flex-end}
+.pc b{display:block;font:400 28px var(--serif)} .pc small{color:var(--ink2);font-size:14px}
+.pc em{font-style:normal;font-size:22px;transition:transform .2s} .pc:hover em{transform:translateX(4px)}
+.r1{display:grid;grid-template-columns:760px 1fr;gap:40px;align-items:start}
+.r1 .col{display:grid;gap:40px}
+.r2{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+/* services */
+.svc{background:var(--surface)}
+.svc .wrap{display:grid;grid-template-columns:440px 1fr;gap:96px}
+.svc-l{display:grid;align-content:start;gap:24px} .svc-l p{color:var(--ink2);font-size:17px;max-width:420px}
+.srow{display:grid;grid-template-columns:40px 1fr;gap:32px;padding:28px 0;border-top:1px solid var(--line)}
+.srow i{font-style:normal;font-weight:600;font-size:13px;color:var(--accent-deep);letter-spacing:.1em;padding-top:10px}
+.srow b{display:block;font:400 32px var(--serif)} .srow p{color:var(--ink2);font-size:15px;margin-top:6px}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.step{background:var(--surface);border-radius:4px;padding:28px 24px 32px}
+.step small{font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep)}
+.step b{display:block;font:400 28px var(--serif);margin:14px 0 12px} .step p{color:var(--ink2);font-size:14px}
+/* renovation */
+.ren{background:var(--muted)}
+.ren .wrap{display:grid;grid-template-columns:600px 1fr;gap:96px;align-items:center}
+.ren img{height:520px;width:100%;object-fit:cover;border-radius:4px}
+.ren h2{font-size:56px;margin:20px 0 28px}
+.chk{display:grid;gap:14px;margin-bottom:36px} .chk li{list-style:none;display:flex;align-items:center;gap:12px;font-size:15px}
+.chk li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+/* packages */
+.pk-h{text-align:center;display:grid;gap:16px;justify-items:center;margin-bottom:56px} .pk-h p{color:var(--ink2);font-size:17px}
+.pks{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pk{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:36px 32px;display:flex;flex-direction:column;gap:24px}
+.pk.hot{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pk .top{display:flex;justify-content:space-between;align-items:center} .pk .top b{font:400 30px var(--serif)}
+.badge{background:var(--accent);color:var(--ink);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.price{display:flex;align-items:baseline;gap:8px} .price b{font:300 56px/1 var(--serif)} .price span,.term{font-weight:500;font-size:14px;opacity:.7}
+.pk hr{border:0;border-top:1px solid var(--line)} .pk.hot hr{border-color:rgba(255,255,255,.15)}
+.pk ul{display:grid;gap:12px} .pk li{list-style:none;display:flex;gap:12px;align-items:center;font-size:15px}
+.pk li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.pk .btn{justify-content:center;margin-top:auto}
+.pk.hot .btn-line{border:0;background:var(--accent);color:var(--ink)}
+/* cta */
+.cta{background:var(--ink);color:#fff;padding:96px 0}
+.cta .wrap{display:flex;justify-content:space-between;align-items:center}
+.cta h2{margin:20px 0 16px;max-width:700px} .cta p{opacity:.7;font-size:17px} .cta .eyebrow{color:var(--accent)}
+/* contact */
+.ct .wrap{display:grid;grid-template-columns:1fr 560px;gap:96px}
+.ct-l{display:grid;gap:28px;align-content:start} .ct-l>p{color:var(--ink2);font-size:17px;max-width:480px}
+.info{display:grid;gap:20px;padding-top:12px} .info small{color:var(--ink2);font-weight:500;font-size:13px} .info b{display:block;font:400 26px var(--serif)}
+form{background:var(--surface);border-radius:6px;padding:44px;display:grid;gap:20px}
+label{display:grid;gap:8px;color:var(--ink2);font-weight:500;font-size:13px}
+input,textarea{font:400 15px var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:16px 18px;outline:none}
+input:focus,textarea:focus{border-color:var(--accent)} textarea{min-height:120px;resize:vertical}
+form .btn{justify-content:center;border:0;cursor:pointer} form small{color:var(--ink2);font-size:12px}
+footer{background:var(--muted);padding:72px 0 40px}
+.ft{display:flex;justify-content:space-between} .ft p{color:var(--ink2);font-size:14px;max-width:360px;margin-top:16px}
+.ft ul{list-style:none;display:grid;gap:12px;font-weight:500;font-size:14px} .ft li:first-child{font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep)}
+.ft-b{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:56px;padding-top:24px;color:var(--ink2);font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+  <a class="logo" href="#"><img src="../assets/img/logo-icon.png" alt=""><span><b>APELSIN</b><small>INTERIOR</small></span></a>
+  <nav><a href="#projects">Портфолио</a><a href="#services">Услуги</a><a href="#renovation">Ремонт</a><a href="#packages">Пакеты</a><a href="#calc">Калькулятор</a><a href="#process">Студия</a><a href="#contact">Контакты</a></nav>
+  <div class="hd-r"><a href="tel:+77770239748">+7 777 023 97 48</a><a class="btn btn-ink" href="#contact">Обсудить проект</a></div>
+</div></header>
+
+<div class="hero">
+  <div class="hero-t">
+    <span class="eyebrow">Студия дизайна интерьера · Алматы</span>
+    <h1>Интерьеры, в которых хочется жить</h1>
+    <p>Проект, 3D-визуализация, ремонт и авторский надзор — одна команда и один стандарт качества от эскиза до ключей.</p>
+    <div class="row"><a class="btn btn-acc" href="#calc">Рассчитать стоимость →</a><a class="btn btn-line" href="#projects">Смотреть проекты</a></div>
+    <div class="trust"><i></i>Бесплатная консультация в студии или онлайн</div>
+  </div>
+  <div class="hero-img"><img src="../assets/img/hero-interior.jpg" alt="Гостиная, проект в Атырау"><div class="tagc"><small>Флагманский проект</small><b>Квартира · Атырау, 70 м²</b><span>Минимализм · дизайн-проект + 3D</span></div></div>
+</div>
+
+<div class="stats"><div><b>10</b><span>лет на рынке</span></div><div><b>200 000+</b><span>м² реализовано</span></div><div><b>8</b><span>специалистов в команде</span></div><div><b>98%</b><span>довольных клиентов</span></div></div>
+
+<section id="projects"><div class="wrap">
+  <div class="head"><div><span class="eyebrow">Избранные проекты</span><h2>Работы, которые говорят за нас</h2></div><a class="btn btn-line" href="#">Все проекты →</a></div>
+  <div class="r1">
+    <a class="pc" href="#"><div class="im" style="height:600px"><img src="../assets/img/atyrau_kitchen.jpg" alt=""></div><div class="mt"><div><b>Квартира · Атырау</b><small>Жилое · Минимализм · 70 м²</small></div><em>→</em></div></a>
+    <div class="col">
+      <a class="pc" href="#"><div class="im" style="height:230px"><img src="../assets/img/portfolio_cafe_cafe-01.jpg" alt=""></div><div class="mt"><div><b>Кафе с арочными нишами</b><small>Коммерция · Hospitality</small></div><em>→</em></div></a>
+      <a class="pc" href="#"><div class="im" style="height:230px"><img src="../assets/img/portfolio_kv50_kv50-02.jpg" alt=""></div><div class="mt"><div><b>Квартира КВ50</b><small>Жилое · Минимализм</small></div><em>→</em></div></a>
+    </div>
+  </div>
+  <div class="r2">
+    <a class="pc" href="#"><div class="im" style="height:300px"><img src="../assets/img/portfolio_kv43_kv43-01.jpg" alt=""></div><div class="mt"><div><b>Квартира КВ43</b><small>Жилое · Modern</small></div><em>→</em></div></a>
+    <a class="pc" href="#"><div class="im" style="height:300px"><img src="../assets/img/portfolio_studio_studio-02.jpg" alt=""></div><div class="mt"><div><b>Студия</b><small>Жилое · Modern</small></div><em>→</em></div></a>
+    <a class="pc" href="#"><div class="im" style="height:300px"><img src="../assets/img/portfolio_facade_facade-01.jpg" alt=""></div><div class="mt"><div><b>Фасад Özgeshe DAM</b><small>Фасад · Commercial</small></div><em>→</em></div></a>
+  </div>
+</div></section>
+
+<section class="svc" id="services"><div class="wrap">
+  <div class="svc-l"><span class="eyebrow">Услуги</span><h2>Полный цикл — от идеи до ключей</h2><p>Шесть направлений, объединённых одной командой. Без посредников и без потерь смысла между этапами.</p><div><a class="btn btn-ink" href="#calc">Рассчитать проект</a></div></div>
+  <div>
+    <div class="srow"><i>01</i><div><b>Дизайн интерьера</b><p>Жилые и коммерческие пространства с продуманной эргономикой и эстетикой.</p></div></div>
+    <div class="srow"><i>02</i><div><b>Дизайн экстерьера</b><p>Архитектурные решения для частных домов, фасадов и ландшафта.</p></div></div>
+    <div class="srow"><i>03</i><div><b>Ремонт под ключ</b><p>Полный цикл — от демонтажа до расстановки мебели и декора.</p></div></div>
+    <div class="srow"><i>04</i><div><b>3D-визуализация</b><p>Фотореалистичные визуализации для согласования до начала работ.</p></div></div>
+    <div class="srow"><i>05</i><div><b>Авторский надзор</b><p>Контроль реализации на площадке — соответствие проекту и качеству.</p></div></div>
+    <div class="srow"><i>06</i><div><b>Световой дизайн</b><p>Сценарии освещения, которые работают днём и вечером.</p></div></div>
+  </div>
+</div></section>
+
+<section id="process"><div class="wrap">
+  <div class="head"><div><span class="eyebrow">Как мы работаем</span><h2>Пять шагов к готовому интерьеру</h2></div></div>
+  <div class="steps">
+    <div class="step"><small>Шаг 1</small><b>Бриф и замер</b><p>Знакомимся, обсуждаем образ жизни, бюджет и сроки. Выезжаем на объект.</p></div>
+    <div class="step"><small>Шаг 2</small><b>Планировка</b><p>2–3 варианта планировочного решения и расстановки мебели.</p></div>
+    <div class="step"><small>Шаг 3</small><b>3D-визуализация</b><p>Фотореалистичные виды каждого помещения до начала работ.</p></div>
+    <div class="step"><small>Шаг 4</small><b>Рабочий альбом</b><p>Полный комплект чертежей и спецификаций для строителей.</p></div>
+    <div class="step"><small>Шаг 5</small><b>Реализация</b><p>Ремонт своей бригадой и авторский надзор до сдачи объекта.</p></div>
+  </div>
+</div></section>
+
+<section class="ren" id="renovation"><div class="wrap">
+  <img src="../assets/img/renovation_living-after.jpg" alt="Гостиная после ремонта">
+  <div><span class="eyebrow">Ремонт под ключ</span><h2>Своя бригада. Один договор — одна ответственность</h2>
+    <ul class="chk"><li>Специалисты в фирменной форме, без субподряда</li><li>Прозрачная смета и фотоотчёты онлайн</li><li>Проверка по чек-листу на каждом этапе</li><li>Гарантия 3 года на все работы</li></ul>
+    <a class="btn btn-ink" href="#contact">Заказать ремонт</a></div>
+</div></section>
+
+<section id="packages"><div class="wrap">
+  <div class="pk-h"><span class="eyebrow">Пакеты и цены</span><h2>Прозрачные тарифы. Без сюрпризов</h2><p>Стоимость за м² дизайн-проекта. Точную смету рассчитаем после замера.</p></div>
+  <div class="pks">
+    <div class="pk"><div class="top"><b>Стандарт</b></div><div class="price"><b>1 700</b><span>₸ / м²</span></div><div class="term">Срок: 5–10 дней</div><hr><ul><li>Планировочное решение</li><li>Расстановка мебели</li><li>Цветовая палитра</li><li>Спецификация материалов</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
+    <div class="pk"><div class="top"><b>Индивидуальный</b></div><div class="price"><b>3 500</b><span>₸ / м²</span></div><div class="term">Срок: 10–20 дней</div><hr><ul><li>Всё из «Стандарт»</li><li>3D-визуализация</li><li>Подбор материалов</li><li>Электрика и сантехника</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
+    <div class="pk hot"><div class="top"><b>Бизнес</b><span class="badge">Популярный</span></div><div class="price"><b>8 000</b><span>₸ / м²</span></div><div class="term">Срок: 20–30 дней</div><hr><ul><li>Полный дизайн-проект</li><li>Комплект чертежей</li><li>Авторский надзор</li><li>Подбор подрядчиков</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
+    <div class="pk"><div class="top"><b>Премиум</b></div><div class="price"><b>20 000</b><span>₸ / м²</span></div><div class="term">Срок: от 30 дней</div><hr><ul><li>Эксклюзивный проект</li><li>Дизайнерская мебель</li><li>Smart Home интеграция</li><li>Световой дизайн</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
+  </div>
+</div></section>
+
+<div class="cta" id="calc"><div class="wrap"><div><span class="eyebrow">Калькулятор</span><h2>Узнайте стоимость проекта за 2 минуты</h2><p>7 простых шагов — и ориентировочная смета у вас на экране.</p></div><a class="btn btn-acc" href="#contact">Рассчитать стоимость →</a></div></div>
+
+<section class="ct" id="contact"><div class="wrap">
+  <div class="ct-l"><span class="eyebrow">Контакты</span><h2>Расскажите о вашем проекте</h2><p>Ответим в течение часа в рабочее время. Бесплатная консультация — в студии или онлайн.</p>
+    <div class="info"><div><small>Телефон</small><b>+7 777 023 97 48</b></div><div><small>Email</small><b>hello@apelsin.design</b></div><div><small>Адрес</small><b>Алматы, ул. Абая 150</b></div><div><small>Режим работы</small><b>Пн–Сб · 10:00 – 20:00</b></div></div></div>
+  <form id="wa">
+    <label>Имя *<input name="n" required placeholder="Как к вам обращаться"></label>
+    <label>Телефон *<input name="p" required placeholder="+7 (___) ___-__-__"></label>
+    <label>Email<input name="e" placeholder="необязательно"></label>
+    <label>О проекте *<textarea name="m" required placeholder="Тип объекта, площадь, пожелания…"></textarea></label>
+    <button class="btn btn-acc" type="submit">Отправить в WhatsApp</button>
+    <small>Отправляя форму, вы принимаете политику конфиденциальности.</small>
+  </form>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="ft"><div><span class="logo"><img src="../assets/img/logo-icon.png" alt=""><span><b>APELSIN</b><small>INTERIOR</small></span></span><p>Студия премиального дизайна интерьера с реализацией под ключ. Создаём пространства, в которых хочется жить и работать.</p></div>
+    <ul><li>Навигация</li><li>Портфолио</li><li>Услуги</li><li>Ремонт</li><li>Пакеты</li><li>Калькулятор</li></ul>
+    <ul><li>Студия</li><li>О нас</li><li>Команда</li><li>Вакансии</li><li>Контакты</li></ul>
+    <ul><li>Соцсети</li><li>Instagram</li><li>Telegram</li><li>WhatsApp</li></ul></div>
+  <div class="ft-b"><span>© 2026 APELSIN INTERIOR. Все права защищены.</span><span>Политика конфиденциальности</span></div>
+</div></footer>
+<script src="../assets/wa-form.js"></script>
+<script src="../assets/switcher.js"></script>
+</body>
+</html>
