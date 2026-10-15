@@ -1,12 +1,9 @@
 // Shared splash for every variant.
 // Timeline: a small window reveals and flips through the studio's interiors while "APELSIN" rises letter by letter
 // and a counter runs to 100; the window then expands to full screen on the hero photo and dissolves into the page.
-// Page entrance animations are held until the splash leaves. Shown once per session (?splash forces it, ?nosplash skips).
+// Page entrance animations are held until the splash leaves. Shown on every page load (?nosplash skips).
 (function () {
-  var q = location.search, force = /[?&]splash/.test(q), seen = false;
-  try { seen = sessionStorage.getItem('apelsin-splash') === '1'; } catch (e) {}
-  if (/[?&]nosplash/.test(q) || (seen && !force) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  try { sessionStorage.setItem('apelsin-splash', '1'); } catch (e) {}
+  if (/[?&]nosplash/.test(location.search) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var root = document.documentElement;
   var base = root.getAttribute('data-variant') ? '../' : '';
@@ -103,5 +100,10 @@
       document.dispatchEvent(new CustomEvent('splashdone'));
     });
     at(DUR + 2000, function () { el.remove(); style.remove(); });
+  });
+
+  // Returning via the back/forward cache mid-splash must never leave the page locked.
+  addEventListener('pageshow', function (e) {
+    if (e.persisted) { root.classList.remove('spl-hide'); if (el.parentNode) el.remove(); }
   });
 })();
