@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>APELSIN — варианты главной страницы</title>
+<script src="assets/splash.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,7 +34,9 @@ h1{font:300 88px/1 "Cormorant Garamond",serif;letter-spacing:-.02em;margin-top:2
 .go{flex:none;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:14px;transition:background .2s}
 .card:hover .go{background:var(--accent);color:var(--ink)}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px} .tags span{font-size:12px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink2)}
-footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink2);font-size:13px;display:flex;justify-content:space-between}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink2);font-size:13px;display:flex;justify-content:space-between;gap:12px}
+@media (max-width:1023px){.intro{grid-template-columns:1fr;gap:24px}.grid{grid-template-columns:1fr}h1{font-size:64px}}
+@media (max-width:767px){.wrap{width:calc(100% - 32px)}header{flex-direction:column;align-items:flex-start;gap:8px}h1{font-size:44px}.intro{padding:40px 0}.grid{gap:40px;padding:40px 0 80px}.meta{flex-direction:column}.meta h2{font-size:28px}footer{flex-direction:column}}
 </style>
 </head>
 <body>
