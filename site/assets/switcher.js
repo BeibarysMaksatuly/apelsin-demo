@@ -1,81 +1,69 @@
-// Floating variant switcher shared by all four homepage variants.
+// Variant switcher: a slim tab on the right edge that opens a side drawer with all four variants.
 (function () {
   var VARIANTS = [
-    { id: 'v1', n: '1', title: 'Исходная версия', note: 'Ваш текущий сайт · светлая и тёмная тема' },
+    { id: 'v1', n: '1', title: 'Исходная версия', note: 'Ваш текущий сайт: светлая и тёмная тема' },
     { id: 'v2', n: '2', title: 'Новая структура', note: 'Ваш стиль и шрифты, перестроенная структура' },
     { id: 'v3', n: '3', title: 'Премиум editorial', note: 'Полный редизайн в журнальном стиле' },
     { id: 'v4', n: '4', title: 'Альтернатива', note: 'Другая концепция подачи' }
   ];
-
   var current = document.documentElement.getAttribute('data-variant');
-  var hasTheme = document.documentElement.hasAttribute('data-theme-toggle');
   var base = current ? '../' : '';
-
-  function store(key, val) {
-    try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; }
-  }
+  var cur = VARIANTS.filter(function (v) { return v.id === current; })[0];
 
   var css = '' +
-    '.vs{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:9999;font:500 13px/1.3 "Manrope",system-ui,sans-serif;color:#161616}' +
-    '.vs-bar{display:flex;align-items:center;gap:6px;padding:6px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(22,22,22,.1);border-radius:999px;box-shadow:0 12px 40px rgba(0,0,0,.18)}' +
-    '.vs a,.vs button{all:unset;cursor:pointer;box-sizing:border-box}' +
-    '.vs-home{padding:9px 14px;border-radius:999px;color:#5a6170}' +
-    '.vs-home:hover{background:#f1ede6;color:#161616}' +
-    '.vs-v{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:999px;white-space:nowrap;transition:background .2s}' +
-    '.vs-home,.vs-theme{white-space:nowrap}' +
-    '.vs-v:hover{background:#f1ede6}' +
-    '.vs-v b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#f1ede6;font-weight:600;font-size:12px}' +
-    '.vs-v.on{background:#161616;color:#fff}.vs-v.on b{background:#ff9500;color:#161616}' +
-    '.vs-sep{width:1px;height:22px;background:rgba(22,22,22,.12);margin:0 4px}' +
-    '.vs-theme{padding:9px 14px;border-radius:999px;border:1px solid rgba(22,22,22,.14)}' +
-    '.vs-theme:hover{background:#f1ede6}' +
-    '.vs-min{width:32px;height:32px;display:grid!important;place-items:center;border-radius:50%;color:#5a6170}' +
-    '.vs-min:hover{background:#f1ede6}' +
-    '.vs-note{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);white-space:nowrap;padding:8px 14px;border-radius:10px;background:#161616;color:#fff;font-size:12px;opacity:0;pointer-events:none;transition:opacity .2s}' +
-    '.vs:hover .vs-note{opacity:1}' +
-    '.vs.mini .vs-v span,.vs.mini .vs-home,.vs.mini .vs-theme,.vs.mini .vs-sep{display:none}' +
-    '.vs.mini .vs-v{padding:8px}';
+    '.vsw,.vsw *{box-sizing:border-box}' +
+    '.vsw{font:500 14px/1.4 "Manrope",system-ui,sans-serif;color:#161616;-webkit-font-smoothing:antialiased}' +
+    '.vsw-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9998;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 9px;border:0;border-radius:14px 0 0 14px;background:#161616;color:#fff;cursor:pointer;box-shadow:-6px 10px 30px rgba(0,0,0,.18);transition:padding .25s,background .25s}' +
+    '.vsw-tab:hover{padding-right:13px;background:#000}' +
+    '.vsw-tab b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#ff9500;color:#161616;font-size:12px;font-weight:700}' +
+    '.vsw-tab span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;letter-spacing:.14em;text-transform:uppercase}' +
+    '.vsw-scrim{position:fixed;inset:0;z-index:9998;background:rgba(10,10,10,.35);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .35s}' +
+    '.vsw-panel{position:fixed;top:0;right:0;bottom:0;z-index:9999;width:min(380px,92vw);background:#f7f4ef;box-shadow:-20px 0 60px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .45s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column}' +
+    '.vsw.open .vsw-panel{transform:none}.vsw.open .vsw-scrim{opacity:1;pointer-events:auto}' +
+    '.vsw-hd{display:flex;justify-content:space-between;align-items:flex-start;padding:28px 24px 18px;border-bottom:1px solid #e2dcd2}' +
+    '.vsw-hd small{display:block;color:#c96f00;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}' +
+    '.vsw-hd strong{display:block;margin-top:6px;font:500 26px/1.1 "Cormorant Garamond",Georgia,serif}' +
+    '.vsw-x{width:36px;height:36px;border-radius:50%;border:1px solid #e2dcd2;background:#fff;display:grid;place-items:center;cursor:pointer;font-size:18px;line-height:1;color:#161616}' +
+    '.vsw-list{padding:16px;display:grid;gap:10px;overflow-y:auto}' +
+    '.vsw-item{display:grid;grid-template-columns:112px 1fr;gap:14px;align-items:center;padding:10px;border-radius:14px;background:#fff;border:1px solid transparent;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}' +
+    '.vsw-item:hover{border-color:#e2dcd2;transform:translateX(-2px)}' +
+    '.vsw-item.on{border-color:#ff9500;box-shadow:0 0 0 3px rgba(255,149,0,.15)}' +
+    '.vsw-th{position:relative;height:72px;border-radius:9px;overflow:hidden;background:#eee9e1}' +
+    '.vsw-th img{width:100%;height:100%;object-fit:cover;object-position:top}' +
+    '.vsw-th b{position:absolute;left:6px;top:6px;width:22px;height:22px;border-radius:50%;background:#ff9500;display:grid;place-items:center;font-size:11px;font-weight:700}' +
+    '.vsw-item strong{display:block;font-size:15px;font-weight:600}' +
+    '.vsw-item p{margin:3px 0 0;color:#5a6170;font-size:12.5px;line-height:1.4;font-weight:400}' +
+    '.vsw-item em{display:inline-block;margin-top:6px;font-style:normal;font-size:11px;font-weight:600;color:#c96f00;letter-spacing:.06em;text-transform:uppercase}' +
+    '.vsw-ft{margin-top:auto;padding:16px 24px 24px;border-top:1px solid #e2dcd2;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:#5a6170}' +
+    '.vsw-ft a{color:#161616;text-decoration:none;border-bottom:1px solid currentColor}' +
+    '@media (max-width:767px){.vsw-tab{top:auto;bottom:140px;transform:none;padding:12px 7px}.vsw-tab span{font-size:10px}}';
 
   var style = document.createElement('style');
   style.textContent = css;
   document.head.appendChild(style);
 
-  var root = document.createElement('nav');
-  root.className = 'vs';
-  root.setAttribute('aria-label', 'Варианты дизайна');
-  var cur = VARIANTS.filter(function (v) { return v.id === current; })[0];
+  var items = VARIANTS.map(function (v) {
+    var on = v.id === current;
+    return '<a class="vsw-item' + (on ? ' on' : '') + '" href="' + base + v.id + '/index.html">' +
+      '<span class="vsw-th"><img src="' + base + 'assets/previews/' + v.id + '.jpg" alt=""><b>' + v.n + '</b></span>' +
+      '<span><strong>' + v.title + '</strong><p>' + v.note + '</p>' + (on ? '<em>Вы смотрите</em>' : '') + '</span></a>';
+  }).join('');
 
-  var html = '<div class="vs-note">' + (cur ? 'Вариант ' + cur.n + ' — ' + cur.note : 'Выберите вариант') + '</div><div class="vs-bar">';
-  html += '<a class="vs-home" href="' + base + 'index.html">Все варианты</a>';
-  VARIANTS.forEach(function (v) {
-    html += '<a class="vs-v' + (v.id === current ? ' on' : '') + '" href="' + base + v.id + '/index.html" title="' + v.note + '"><b>' + v.n + '</b><span>' + v.title + '</span></a>';
-  });
-  if (hasTheme) html += '<span class="vs-sep"></span><button class="vs-theme" type="button"></button>';
-  html += '<button class="vs-min" type="button" aria-label="Свернуть панель">–</button></div>';
-  root.innerHTML = html;
+  var root = document.createElement('div');
+  root.className = 'vsw';
+  root.innerHTML =
+    '<button class="vsw-tab" type="button" aria-label="Открыть варианты дизайна"><b>' + (cur ? cur.n : '4') + '</b><span>Варианты</span></button>' +
+    '<div class="vsw-scrim"></div>' +
+    '<aside class="vsw-panel" role="dialog" aria-label="Варианты главной страницы">' +
+      '<div class="vsw-hd"><div><small>APELSIN · демо</small><strong>Варианты главной</strong></div><button class="vsw-x" type="button" aria-label="Закрыть">×</button></div>' +
+      '<div class="vsw-list">' + items + '</div>' +
+      '<div class="vsw-ft"><span>' + (cur ? 'Вариант ' + cur.n + ' из 4' : '4 варианта') + '</span><a href="' + base + 'index.html">Сравнить все варианты</a></div>' +
+    '</aside>';
   document.body.appendChild(root);
 
-  if (store('vs-mini') === '1') root.classList.add('mini');
-  root.querySelector('.vs-min').addEventListener('click', function () {
-    root.classList.toggle('mini');
-    store('vs-mini', root.classList.contains('mini') ? '1' : '0');
-    this.textContent = root.classList.contains('mini') ? '+' : '–';
-  });
-  if (root.classList.contains('mini')) root.querySelector('.vs-min').textContent = '+';
-
-  if (hasTheme) {
-    var btn = root.querySelector('.vs-theme');
-    var paint = function () {
-      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-      btn.textContent = dark ? '☀ Светлая тема' : '☾ Тёмная тема';
-    };
-    btn.addEventListener('click', function () {
-      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      store('v1-theme', next);
-      paint();
-      document.dispatchEvent(new CustomEvent('themechange'));
-    });
-    paint();
-  }
+  function toggle(open) { root.classList.toggle('open', open); }
+  root.querySelector('.vsw-tab').addEventListener('click', function () { toggle(true); });
+  root.querySelector('.vsw-x').addEventListener('click', function () { toggle(false); });
+  root.querySelector('.vsw-scrim').addEventListener('click', function () { toggle(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false); });
 })();

@@ -2,212 +2,613 @@
 <html lang="ru" data-variant="v2">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Вариант 2 — Новая структура · APELSIN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f4ef;--surface:#fff;--muted:#eee9e1;--ink:#161616;--ink2:#5a6170;--line:#e2dcd2;--accent:#ff9500;--accent-deep:#c96f00;
-  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+/* Design tokens taken from apelsin.design (light theme) */
+:root{
+  --orange:#ff9500; --orange-hover:#ffb340; --accent-text:#e67e00;
+  --bg:#f7f4ef; --fg:#161616; --muted:#5a6170; --muted-2:#6b7280; --line:rgba(22,22,22,.1); --pill-border:rgba(22,22,22,.12);
+  --card:#fff; --chip:rgba(22,22,22,.05); --row:rgba(22,22,22,.04); --footer:#efebe4;
+  --warm:linear-gradient(145deg,rgba(255,149,0,.08),#fff 42%,rgba(255,236,214,.65));
+  --shadow:0 1px 2px rgba(22,22,22,.03),0 8px 24px rgba(22,22,22,.04);
+  --shadow-lg:0 1px 2px rgba(22,22,22,.04),0 12px 32px rgba(22,22,22,.06);
+  --display:"Cormorant Garamond",Georgia,serif; --sans:"Manrope",system-ui,sans-serif;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans)}
-a{color:inherit;text-decoration:none} img{display:block;max-width:100%}
-.wrap{width:min(1280px,calc(100% - 160px));margin:0 auto}
-.eyebrow{font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-deep)}
-h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.01em}
-h2{font-size:60px;line-height:1.05}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:.01em;transition:transform .2s,box-shadow .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
-.btn-acc{background:var(--accent);color:var(--ink)} .btn-ink{background:var(--ink);color:#fff} .btn-line{border:1px solid var(--ink)}
-section{padding:120px 0}
-.head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
-.head h2{margin-top:16px;max-width:720px}
-/* header */
-header{position:sticky;top:0;z-index:30;background:rgba(247,244,239,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.hd{display:flex;align-items:center;justify-content:space-between;height:96px}
-.logo{display:flex;align-items:center;gap:12px} .logo img{width:38px}
-.logo b{display:block;font:500 24px/1 var(--serif);letter-spacing:.06em} .logo small{display:block;font-weight:600;font-size:9px;letter-spacing:.42em;color:var(--accent-deep);margin-top:4px}
-nav{display:flex;gap:36px;font-weight:500;font-size:14px} nav a:hover{color:var(--accent-deep)}
-.hd-r{display:flex;align-items:center;gap:24px;font-weight:600;font-size:14px}
-/* hero */
-.hero{display:grid;grid-template-columns:1fr 700px;gap:72px;padding:72px 0 0 80px}
-.hero-t{padding-top:56px;display:grid;align-content:start;gap:32px}
-.hero h1{font-size:96px;line-height:.96;letter-spacing:-.02em}
-.hero p{color:var(--ink2);font-size:18px;max-width:500px}
-.hero .row{display:flex;gap:14px}
-.trust{display:flex;align-items:center;gap:12px;color:var(--ink2);font-weight:500;font-size:14px;padding-top:24px}
-.trust i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.hero-img{position:relative;height:760px}
-.hero-img img{width:100%;height:100%;object-fit:cover;border-top-left-radius:6px}
-.tagc{position:absolute;left:40px;bottom:40px;background:var(--surface);padding:20px 24px;border-radius:4px}
-.tagc small{font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-deep)}
-.tagc b{display:block;font:400 26px var(--serif)} .tagc span{color:var(--ink2);font-size:13px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none} button,input,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+svg.i{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.c{width:100%;max-width:1216px;margin:0 auto;padding:0 40px}
+.sec{border-top:1px solid var(--line);padding:72px 0 80px}
+.eyebrow{font-size:12px;line-height:18px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+.kicker{font-size:11px;line-height:16.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-text)}
+.h2{margin-top:12px;font:600 44px/1.12 var(--display);letter-spacing:-.015em;text-wrap:balance}
+.lead{margin-top:12px;max-width:576px;font-size:16px;line-height:26px;color:var(--muted)}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px}
+.btn-o{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:999px;background:var(--orange);color:#000;font-size:14px;line-height:20px;font-weight:500;white-space:nowrap;transition:background .3s,transform .15s}
+.btn-o:hover{background:var(--orange-hover)} .btn-o:active{transform:scale(.98)}
+.btn-l{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:999px;border:1px solid var(--pill-border);font-size:14px;line-height:20px;font-weight:500;white-space:nowrap;transition:border-color .2s,background .2s}
+.btn-l:hover{border-color:rgba(255,149,0,.5);background:rgba(255,149,0,.06)}
+.panel{border-radius:12px;background:var(--card);box-shadow:var(--shadow)}
+.warm{border-radius:12px;border:1px solid rgba(255,149,0,.18);background:var(--warm);box-shadow:0 1px 2px rgba(22,22,22,.03),0 8px 24px rgba(255,149,0,.05)}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* header (as on apelsin.design) */
+header{position:fixed;inset:0 0 auto;z-index:60;height:80px;background:rgba(255,255,255,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(22,22,22,.04)}
+.hd{height:80px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:inline-flex;align-items:center;gap:10px;flex:none}
+.logo img{width:40px;height:40px;object-fit:contain}
+.logo b{display:block;font:600 15.68px/1 var(--display);letter-spacing:.12em;text-transform:uppercase}
+.logo small{display:block;margin-top:2px;font-size:9.6px;line-height:1;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-text)}
+nav.main{display:flex;gap:4px}
+nav.main a{padding:8px 12px;border-radius:999px;font-size:13px;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .2s,background .2s}
+nav.main a:hover,nav.main a.on{color:var(--fg)} nav.main a.on{background:var(--chip)}
+.hd-r{display:flex;align-items:center;gap:10px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--pill-border);font-size:12px;color:var(--muted);white-space:nowrap;transition:border-color .2s,color .2s}
+.pill:hover{border-color:rgba(255,149,0,.4);color:var(--fg)} .pill .i{width:14px;height:14px}
+.cta-sm{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;background:var(--orange);color:#000;font-size:12px;line-height:16px;font-weight:600;white-space:nowrap}
+.cta-sm:hover{background:var(--orange-hover)}
+.burger{display:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--pill-border);place-items:center}
+.burger .i{width:20px;height:20px}
+.mm{position:fixed;inset:52px 0 auto;z-index:59;background:#fff;padding:16px;display:none;border-bottom:1px solid var(--line);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+.mm.open{display:block}
+.mm-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mm-g a{padding:12px 16px;border-radius:16px;background:var(--bg);font-size:15px}
+.mm .btn-o{width:100%;margin-top:16px}
+
+/* hero: split layout (new) */
+main{padding-top:80px}
+.hero{padding:56px 0 72px}
+.hero .c{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero h1{margin-top:16px;font:600 60px/1.06 var(--display);letter-spacing:-.02em;text-wrap:balance}
+.hero p.lead{margin-top:20px;max-width:500px}
+.hero-b{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.trust span{display:inline-flex;align-items:center;gap:8px}
+.trust .i{width:16px;height:16px;color:var(--orange)}
+.hero-im{position:relative;aspect-ratio:4/5;max-height:640px;width:100%;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero-im img{width:100%;height:100%;object-fit:cover}
+.hero-tag{position:absolute;left:20px;right:20px;bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px)}
+.hero-tag b{display:block;margin-top:4px;font:600 20px/1.2 var(--display)}
+.hero-tag small{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
+.hero-tag a{width:40px;height:40px;border-radius:50%;background:var(--orange);color:#000;display:grid;place-items:center;flex:none}
+
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);padding:72px 80px}
-.stats div+div{border-left:1px solid var(--line);padding-left:40px}
-.stats b{display:block;font:300 64px/1 var(--serif)} .stats span{color:var(--ink2);font-weight:500;font-size:14px}
-/* projects */
-.pc{display:grid;gap:18px}
-.pc .im{overflow:hidden;border-radius:4px;background:var(--muted)}
-.pc img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-.pc:hover img{transform:scale(1.04)}
-.pc .mt{display:flex;justify-content:space-between;align-items:flex-end}
-.pc b{display:block;font:400 28px var(--serif)} .pc small{color:var(--ink2);font-size:14px}
-.pc em{font-style:normal;font-size:22px;transition:transform .2s} .pc:hover em{transform:translateX(4px)}
-.r1{display:grid;grid-template-columns:760px 1fr;gap:40px;align-items:start}
-.r1 .col{display:grid;gap:40px}
-.r2{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stats .warm{padding:24px}
+.stats b{display:block;font:600 36px/1.1 var(--display);letter-spacing:-.02em}
+.stats span{display:block;margin-top:8px;font-size:14px;color:var(--muted)}
+
 /* services */
-.svc{background:var(--surface)}
-.svc .wrap{display:grid;grid-template-columns:440px 1fr;gap:96px}
-.svc-l{display:grid;align-content:start;gap:24px} .svc-l p{color:var(--ink2);font-size:17px;max-width:420px}
-.srow{display:grid;grid-template-columns:40px 1fr;gap:32px;padding:28px 0;border-top:1px solid var(--line)}
-.srow i{font-style:normal;font-weight:600;font-size:13px;color:var(--accent-deep);letter-spacing:.1em;padding-top:10px}
-.srow b{display:block;font:400 32px var(--serif)} .srow p{color:var(--ink2);font-size:15px;margin-top:6px}
-/* process */
-.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
-.step{background:var(--surface);border-radius:4px;padding:28px 24px 32px}
-.step small{font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep)}
-.step b{display:block;font:400 28px var(--serif);margin:14px 0 12px} .step p{color:var(--ink2);font-size:14px}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc article{padding:36px;transition:transform .3s,box-shadow .3s}
+.svc article:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,149,0,.12);color:var(--accent-text)}
+.ico .i{width:20px;height:20px}
+.svc h3{margin-top:28px;font:600 24px/32px var(--display);letter-spacing:-.02em}
+.svc p{margin-top:12px;font-size:14px;line-height:22.75px;color:var(--muted)}
+.center{display:flex;justify-content:center;margin-top:40px}
+
+/* portfolio */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.sh .chips{flex:none;flex-wrap:nowrap}
+.chips button{padding:8px 16px;border-radius:999px;background:var(--chip);font-size:14px;line-height:20px;font-weight:500;color:var(--muted);transition:background .3s,color .3s}
+.chips button:hover{color:var(--fg)}
+.chips button.on{background:var(--orange);color:#000;box-shadow:0 0 24px rgba(255,149,0,.2)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{display:block;border-radius:16px;overflow:hidden}
+.card.hide{display:none}
+.card-im{position:relative;aspect-ratio:3/4;background:#0a0a0a;overflow:hidden}
+.card-im img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease-out}
+.card:hover .card-im img{transform:scale(1.05)}
+.card-im::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.25),transparent)}
+.cap{position:absolute;inset:auto 0 0;z-index:1;padding:20px;color:#fff;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.cap b{display:block;font-size:16px;line-height:24px;font-weight:600;letter-spacing:-.025em}
+.cap span{display:block;margin-top:4px;font-size:14px;line-height:20px;color:rgba(255,255,255,.78)}
+.cap em{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;flex:none;transition:background .3s,border-color .3s}
+.card:hover .cap em{background:var(--orange);border-color:var(--orange);color:#000}
+.t3d{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.55);backdrop-filter:blur(4px);color:#fff;font-size:12px;font-weight:500}
+.t3d .i{width:14px;height:14px;color:var(--orange)}
+
+/* flagship + album */
+.flag{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.flag-l{grid-column:span 7}.flag-r{grid-column:span 5;display:flex;flex-direction:column}
+.gm{aspect-ratio:16/11;border-radius:16px;overflow:hidden;background:#0a0a0a}
+.gm img{width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.th{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+.th button{aspect-ratio:1;border-radius:8px;overflow:hidden;opacity:.55;box-shadow:0 0 0 2px transparent;transition:opacity .2s,box-shadow .2s}
+.th button:hover{opacity:1} .th button.on{opacity:1;box-shadow:0 0 0 2px var(--orange)}
+.th img{width:100%;height:100%;object-fit:cover}
+.flag-r h3{margin-top:8px;font:600 36px/1.15 var(--display);letter-spacing:-.02em}
+.flag-r>p{margin-top:16px;font-size:15px;line-height:24px;color:var(--muted)}
+.spec{margin-top:24px;padding:4px 20px}
+.spec div{display:flex;justify-content:space-between;gap:12px;padding:14px 0;font-size:14px;border-top:1px solid var(--line)}
+.spec div:first-child{border-top:0}
+.spec span{color:var(--muted)} .spec b{font-weight:600}
+.flag-b{display:flex;gap:12px;margin-top:24px}
+.flag-b>*{flex:1}
+.tour{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:999px;border:1px solid rgba(255,149,0,.5);color:var(--accent-text);font-size:14px;font-weight:500;transition:background .2s}
+.tour:hover{background:rgba(255,149,0,.08)}
+.album{margin-top:32px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.album-t b{display:block;font:600 22px/1.2 var(--display)} .album-t span{display:block;margin-top:4px;font-size:13px;color:var(--muted)}
+.strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.strip::-webkit-scrollbar{display:none}
+.strip button{flex:0 0 80px;height:56px;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--line);transition:box-shadow .2s,transform .2s}
+.strip button:hover{box-shadow:0 0 0 2px var(--orange);transform:translateY(-2px)}
+.strip img{width:100%;height:100%;object-fit:cover}
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:80;background:rgba(10,10,10,.9);display:none;align-items:center;justify-content:center;padding:72px 24px 96px}
+.lb.open{display:flex}
+.lb img{max-width:min(1200px,100%);max-height:100%;object-fit:contain;border-radius:8px;background:#fff}
+.lb-x,.lb-p,.lb-n{position:absolute;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center}
+.lb-x{top:16px;right:16px}.lb-p{left:16px;top:50%}.lb-n{right:16px;top:50%}
+.lb-c{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:#b8c0cc;font-size:13px}
+
 /* renovation */
-.ren{background:var(--muted)}
-.ren .wrap{display:grid;grid-template-columns:600px 1fr;gap:96px;align-items:center}
-.ren img{height:520px;width:100%;object-fit:cover;border-radius:4px}
-.ren h2{font-size:56px;margin:20px 0 28px}
-.chk{display:grid;gap:14px;margin-bottom:36px} .chk li{list-style:none;display:flex;align-items:center;gap:12px;font-size:15px}
-.chk li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.ren{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:start}
+.guar{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.guar div{padding:20px}
+.guar b{display:block;font:600 28px/1 var(--display);color:var(--accent-text)}
+.guar h4{margin-top:12px;font:600 20px/28px var(--display)}
+.guar p{margin-top:6px;font-size:13px;line-height:20px;color:var(--muted)}
+.ba-tabs{display:flex;gap:8px;margin-bottom:16px}
+.ba{position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;user-select:none;touch-action:pan-y;background:#0a0a0a;cursor:ew-resize}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .before{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
+.ba-h{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;margin-left:-1px;background:#fff;pointer-events:none}
+.ba-h span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--orange);display:grid;place-items:center;color:#000;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.ba-l{position:absolute;top:12px;z-index:2;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.7);color:#fff;font-size:12px;font-weight:600}
+.ba-hint{margin-top:10px;font-size:12px;color:var(--muted);text-align:center}
+.dirs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
+.dirs div{display:flex;align-items:center;gap:12px;padding:16px 18px;font-size:14px}
+.dirs .i{width:18px;height:18px;color:var(--orange)}
+
 /* packages */
-.pk-h{text-align:center;display:grid;gap:16px;justify-items:center;margin-bottom:56px} .pk-h p{color:var(--ink2);font-size:17px}
-.pks{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.pk{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:36px 32px;display:flex;flex-direction:column;gap:24px}
-.pk.hot{background:var(--ink);color:#fff;border-color:var(--ink)}
-.pk .top{display:flex;justify-content:space-between;align-items:center} .pk .top b{font:400 30px var(--serif)}
-.badge{background:var(--accent);color:var(--ink);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
-.price{display:flex;align-items:baseline;gap:8px} .price b{font:300 56px/1 var(--serif)} .price span,.term{font-weight:500;font-size:14px;opacity:.7}
-.pk hr{border:0;border-top:1px solid var(--line)} .pk.hot hr{border-color:rgba(255,255,255,.15)}
-.pk ul{display:grid;gap:12px} .pk li{list-style:none;display:flex;gap:12px;align-items:center;font-size:15px}
-.pk li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
-.pk .btn{justify-content:center;margin-top:auto}
-.pk.hot .btn-line{border:0;background:var(--accent);color:var(--ink)}
-/* cta */
-.cta{background:var(--ink);color:#fff;padding:96px 0}
-.cta .wrap{display:flex;justify-content:space-between;align-items:center}
-.cta h2{margin:20px 0 16px;max-width:700px} .cta p{opacity:.7;font-size:17px} .cta .eyebrow{color:var(--accent)}
+.pks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+.pk{display:flex;flex-direction:column;padding:28px;border-radius:16px;background:var(--card);box-shadow:var(--shadow)}
+.pk.hot{background:var(--orange);color:#000;box-shadow:0 20px 40px rgba(255,149,0,.25)}
+.pop{display:inline-flex;align-items:center;gap:6px;width:fit-content;margin-bottom:16px;padding:4px 12px;border-radius:999px;background:#000;color:var(--accent-text);font-size:11px;font-weight:600;letter-spacing:.025em;text-transform:uppercase}
+.pop .i{width:12px;height:12px;fill:currentColor}
+.pk .kicker{color:var(--muted)} .pk.hot .kicker{color:rgba(0,0,0,.7)}
+.price{display:flex;align-items:baseline;gap:8px;margin-top:16px}
+.price b{font:600 36px/1.1 var(--display);letter-spacing:-.025em}
+.price span,.term{font-size:14px;color:var(--muted)} .term{display:block;margin-top:6px;font-size:12px}
+.pk.hot .price span,.pk.hot .term{color:rgba(0,0,0,.7)}
+.pk ul{list-style:none;display:grid;gap:12px;margin-top:20px;font-size:14px;line-height:20px}
+.pk li{display:flex;gap:10px}
+.pk li .i{margin-top:2px;color:var(--orange)} .pk.hot li .i{color:rgba(0,0,0,.8)}
+.pk .pick{margin-top:auto;padding-top:24px}
+.pk .pick a{display:flex;justify-content:center;padding:14px 20px;border-radius:999px;background:var(--orange);color:#000;font-size:14px;font-weight:500;transition:background .2s}
+.pk .pick a:hover{background:var(--orange-hover)}
+.pk.hot .pick a{background:#161616;color:#fff} .pk.hot .pick a:hover{background:#000}
+.custom{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:20px;padding:32px 40px}
+.custom h3{margin-top:8px;font:600 30px/36px var(--display)} .custom p{margin-top:6px;font-size:14px;color:var(--muted)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.calc-l{grid-column:span 8;padding:40px}.calc-r{grid-column:span 4}
+.steps{display:flex;gap:8px;margin-bottom:28px}
+.steps i{flex:1;height:4px;border-radius:4px;background:var(--chip);transition:background .3s}
+.steps i.on{background:var(--orange)}
+.step{display:none}.step.on{display:block}
+.step .kicker{color:var(--muted)}
+.step h3{margin-top:8px;font:600 30px/36px var(--display);letter-spacing:-.025em}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.opts.four{grid-template-columns:repeat(2,1fr)}
+.opt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:20px 24px;border-radius:16px;border:1px solid var(--line);background:var(--bg);text-align:left;transition:border-color .2s,background .2s}
+.opt:hover{border-color:rgba(255,149,0,.4)}
+.opt.on{border-color:var(--orange);background:rgba(255,149,0,.08)}
+.opt b{font-size:16px;font-weight:500} .opt span{font-size:13px;color:var(--muted)}
+.area{margin-top:28px}
+.area output{display:block;font:600 48px/1 var(--display)} .area output small{font-size:20px}
+.area input{width:100%;margin-top:20px;accent-color:var(--orange)}
+.area .scale{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:var(--muted)}
+.calc-nav{display:flex;justify-content:space-between;margin-top:36px}
+.calc-nav button:disabled{opacity:.3;cursor:default}
+.sum{position:sticky;top:104px;padding:28px}
+.sum dl{display:grid;gap:12px;margin-top:20px;font-size:14px}
+.sum dl div{display:flex;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sum dt{color:var(--muted)} .sum dd{font-weight:600;text-align:right}
+.sum .tot{margin-top:24px}
+.sum .tot span{font-size:12px;color:var(--muted)}
+.sum .tot b{display:block;margin-top:4px;font:600 40px/1.05 var(--display);letter-spacing:-.02em}
+.sum .btn-o{width:100%;margin-top:20px}
+.sum small{display:block;margin-top:12px;font-size:11px;line-height:1.6;color:var(--muted)}
+
+/* team + philosophy */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.team figure{overflow:hidden}
+.team .ph{aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--chip)}
+.team img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.team figure:hover img{transform:scale(1.04)}
+.team figcaption{padding:16px 4px 0}
+.team span{font-size:14px;color:var(--muted)} .team b{display:block;margin-top:4px;font-size:16px;font-weight:500}
+.phil{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:72px}
+.phil-im{aspect-ratio:4/5;border-radius:24px;overflow:hidden}
+.phil-im img{width:100%;height:100%;object-fit:cover}
+.phil-t{display:grid;gap:36px}
+.phil-t h3{margin-top:10px;font:600 30px/36px var(--display);letter-spacing:-.02em}
+.phil-t p:not(.eyebrow){margin-top:10px;font-size:16px;line-height:26px;color:var(--muted)}
+
 /* contact */
-.ct .wrap{display:grid;grid-template-columns:1fr 560px;gap:96px}
-.ct-l{display:grid;gap:28px;align-content:start} .ct-l>p{color:var(--ink2);font-size:17px;max-width:480px}
-.info{display:grid;gap:20px;padding-top:12px} .info small{color:var(--ink2);font-weight:500;font-size:13px} .info b{display:block;font:400 26px var(--serif)}
-form{background:var(--surface);border-radius:6px;padding:44px;display:grid;gap:20px}
-label{display:grid;gap:8px;color:var(--ink2);font-weight:500;font-size:13px}
-input,textarea{font:400 15px var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:16px 18px;outline:none}
-input:focus,textarea:focus{border-color:var(--accent)} textarea{min-height:120px;resize:vertical}
-form .btn{justify-content:center;border:0;cursor:pointer} form small{color:var(--ink2);font-size:12px}
-footer{background:var(--muted);padding:72px 0 40px}
-.ft{display:flex;justify-content:space-between} .ft p{color:var(--ink2);font-size:14px;max-width:360px;margin-top:16px}
-.ft ul{list-style:none;display:grid;gap:12px;font-weight:500;font-size:14px} .ft li:first-child{font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep)}
-.ft-b{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:56px;padding-top:24px;color:var(--ink2);font-size:13px}
+.ct{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.form{grid-column:span 7;padding:40px;display:grid;gap:20px}
+.ct-r{grid-column:span 5;display:grid;gap:16px;align-content:start}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label span{font-size:12px;font-weight:500;color:var(--muted)}
+.field{display:block;width:100%;margin-top:8px;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg);font-size:16px;outline:none;transition:border-color .2s,box-shadow .2s}
+.field:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,149,0,.15)}
+textarea.field{min-height:110px;resize:vertical}
+.form .btn-o{width:100%;border:0;cursor:pointer}
+.form .note{font-size:11px;line-height:1.6;color:var(--muted);text-align:center}
+.form .note a{color:var(--accent-text)}
+.ci{display:flex;gap:14px;padding:22px 24px}
+.ci .ico{width:40px;height:40px} .ci .ico .i{width:16px;height:16px}
+.ci small{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.ci b{display:block;margin-top:2px;font-size:16px;font-weight:400}
+.ci em{display:block;margin-top:2px;font-style:normal;font-size:12px;color:var(--muted)}
+.socs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.socs a{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px;font-size:12px;color:var(--muted);transition:transform .2s}
+.socs a:hover{transform:translateY(-2px)} .socs .i{width:20px;height:20px;color:var(--orange)}
+
+/* footer (as on apelsin.design) */
+footer{border-top:1px solid var(--line);background:var(--footer)}
+.ft{display:grid;grid-template-columns:repeat(4,1fr);gap:56px;padding:64px 40px}
+.ft-brand{grid-column:span 2;max-width:448px}
+.ft-brand h2{margin-top:24px;font:600 24px/32px var(--display);letter-spacing:-.025em}
+.ft-brand p{margin-top:16px;font-size:14px;line-height:22.75px;color:var(--muted)}
+.soc{display:flex;gap:12px;margin-top:28px}
+.soc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--row);color:var(--muted)}
+.soc a:hover{color:var(--fg)}
+.ft h4{margin-bottom:20px;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
+.ft ul{list-style:none;display:grid;gap:14px;font-size:14px;color:var(--muted)}
+.ft ul a:hover{color:var(--fg)}
+.ft-b{border-top:1px solid var(--line)}
+.ft-b .c{display:flex;justify-content:space-between;gap:12px;padding-top:24px;padding-bottom:24px;font-size:12px;color:var(--muted)}
+.ft-b .c div{display:flex;gap:16px}
+.wa{position:fixed;right:24px;bottom:28px;z-index:50;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#000;box-shadow:0 8px 32px rgba(37,211,102,.35)}
+.wa .i{width:20px;height:20px}
+.tabbar{display:none;position:fixed;inset:auto 0 0;z-index:55;background:rgba(255,255,255,.95);border-top:1px solid var(--line);backdrop-filter:blur(24px);padding:6px 2px calc(6px + env(safe-area-inset-bottom))}
+.tabbar ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr)}
+.tabbar a{min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px;font-weight:600;letter-spacing:.025em;color:#9ca3af}
+.tabbar a.on{color:var(--accent-text)} .tabbar .i{width:20px;height:20px}
+
+/* responsive — mirrors the original's mobile patterns */
+@media (max-width:1279px){ nav.main a{font-size:12px;padding:8px 9px} .tel span{display:none} .tel{width:36px;justify-content:center;padding:0} }
+@media (max-width:1023px){
+  nav.main,.cta-sm{display:none} .burger{display:grid}
+  .hero .c,.ren,.phil{grid-template-columns:1fr} .hero-im{aspect-ratio:4/3}
+  .flag-l,.flag-r,.calc-l,.calc-r,.form,.ct-r{grid-column:1/-1}
+  .svc,.cards{grid-template-columns:1fr 1fr} .pks{grid-template-columns:1fr 1fr} .dirs{grid-template-columns:repeat(3,1fr)} .team{grid-template-columns:repeat(4,1fr)}
+  .sum{position:static}
+}
+@media (max-width:767px){
+  header,.hd{height:52px} main{padding-top:52px} html{scroll-padding-top:56px}
+  .c{padding:0 16px}
+  .logo{gap:8px} .logo img{width:36px;height:36px} .logo b{font-size:12.48px} .logo small{font-size:8.8px}
+  .tel{display:none}
+  .sec{padding:48px 0 56px}
+  .eyebrow{font-size:11px}
+  .h2,.hero h1{font-family:var(--sans);letter-spacing:-.03em}
+  .h2{font-size:24px;line-height:1.2}
+  .hero{padding:24px 0 48px} .hero .c{gap:28px}
+  .hero h1{font-size:30px;line-height:1.15}
+  .lead,.hero p.lead{font-size:14px;line-height:22.75px}
+  .hero-b{flex-direction:column} .hero-b>*{width:100%}
+  .trust{gap:8px 16px;font-size:12px}
+  .hero-im{border-radius:16px}
+  .hero-tag b{font:600 16px/1.3 var(--sans)}
+  .sh{flex-direction:column;align-items:flex-start;margin-bottom:28px}
+  .stats{grid-template-columns:1fr 1fr;gap:10px} .stats .warm{padding:16px}
+  .stats b{font:600 21.6px/1.1 var(--sans);letter-spacing:-.03em} .stats span{font-size:11px;margin-top:6px}
+  .svc{grid-template-columns:1fr;gap:12px} .svc article{padding:24px}
+  .svc h3{margin-top:18px;font:600 20px/28px var(--sans);letter-spacing:-.02em}
+  .chips{overflow-x:auto;flex-wrap:nowrap;width:100%;scrollbar-width:none} .chips button{flex:none;font-size:13px}
+  .cards{grid-template-columns:1fr;gap:16px} .card-im{aspect-ratio:16/11}
+  .flag-r h3{font:600 24px/32px var(--sans);letter-spacing:-.03em}
+  .flag-b{flex-direction:column}
+  .album{grid-template-columns:1fr}
+  .guar{grid-template-columns:1fr 1fr;gap:10px} .guar div{padding:16px} .guar h4{font:600 16px/22px var(--sans)}
+  .ba{aspect-ratio:4/3}
+  .dirs{grid-template-columns:1fr 1fr;gap:8px;margin-top:28px} .dirs div{padding:12px;font-size:13px}
+  .pks{grid-template-columns:1fr} .custom{flex-direction:column;align-items:stretch;padding:24px}
+  .custom h3{font:600 22px/30px var(--sans)}
+  .calc-l{padding:24px} .step h3{font:600 22px/30px var(--sans)} .opts,.opts.four{grid-template-columns:1fr}
+  .team{grid-template-columns:1fr 1fr;gap:12px} .team b{font-size:14px} .team span{font-size:12px}
+  .phil{gap:28px;margin-top:48px} .phil-t h3{font:600 22px/30px var(--sans)}
+  .form{padding:24px} .row2{grid-template-columns:1fr}
+  .ft{grid-template-columns:1fr;gap:48px;padding:48px 16px} .ft-brand{grid-column:auto}
+  .ft-brand h2{font:600 20px/28px var(--sans)}
+  .ft-b .c{flex-direction:column;align-items:center}
+  .tabbar{display:block} body{padding-bottom:63px}
+  .wa{right:16px;bottom:calc(68px + env(safe-area-inset-bottom))}
+}
 </style>
 </head>
 <body>
-<header><div class="wrap hd">
-  <a class="logo" href="#"><img src="../assets/img/logo-icon.png" alt=""><span><b>APELSIN</b><small>INTERIOR</small></span></a>
-  <nav><a href="#projects">Портфолио</a><a href="#services">Услуги</a><a href="#renovation">Ремонт</a><a href="#packages">Пакеты</a><a href="#calc">Калькулятор</a><a href="#process">Студия</a><a href="#contact">Контакты</a></nav>
-  <div class="hd-r"><a href="tel:+77770239748">+7 777 023 97 48</a><a class="btn btn-ink" href="#contact">Обсудить проект</a></div>
-</div></header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="arrows-h" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></symbol>
+  <symbol id="chev-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="chev-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="chev-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></symbol>
+  <symbol id="mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path d="M11.5 2.3a.5.5 0 0 1 .9 0l2.3 4.7a2 2 0 0 0 1.5 1.1l5.2.8a.5.5 0 0 1 .3.9l-3.8 3.7a2 2 0 0 0-.6 1.8l.9 5.1a.5.5 0 0 1-.8.6l-4.6-2.4a2 2 0 0 0-1.9 0l-4.6 2.4a.5.5 0 0 1-.8-.6l.9-5.1a2 2 0 0 0-.6-1.8L2.4 9.8a.5.5 0 0 1 .3-.9l5.2-.8a2 2 0 0 0 1.5-1.1z"/></symbol>
+  <symbol id="layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+  <symbol id="building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+  <symbol id="hammer" viewBox="0 0 24 24"><path d="m15 12-8.37 8.37a2.12 2.12 0 1 1-3-3L12 9M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></symbol>
+  <symbol id="cube" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></symbol>
+  <symbol id="pen" viewBox="0 0 24 24"><path d="M15.7 21.3a1 1 0 0 1-1.4 0l-1.6-1.6a1 1 0 0 1 0-1.4l5.6-5.6a1 1 0 0 1 1.4 0l1.6 1.6a1 1 0 0 1 0 1.4z"/><path d="m18 13-1.4-6.9a1 1 0 0 0-.7-.8L3.2 2a.5.5 0 0 0-.6.6L6 15.4a1 1 0 0 0 .7.7L13.6 18M2.3 2.3l7.3 7.3"/><circle cx="11" cy="11" r="2"/></symbol>
+  <symbol id="bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></symbol>
+  <symbol id="ig" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></symbol>
+  <symbol id="send" viewBox="0 0 24 24"><path d="M14.54 21.69a.5.5 0 0 0 .94-.02l6.5-19a.5.5 0 0 0-.64-.64l-19 6.5a.5.5 0 0 0-.02.94l7.93 3.18a2 2 0 0 1 1.11 1.11zM21.85 2.15 10.91 13.09"/></symbol>
+  <symbol id="msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+  <symbol id="menu" viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16"/></symbol>
+  <symbol id="close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .71-1.53l7-6a2 2 0 0 1 2.58 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="images" viewBox="0 0 24 24"><path d="M18 22H4a2 2 0 0 1-2-2V6"/><path d="m22 13-1.3-1.3a2.4 2.4 0 0 0-3.4 0L11 18"/><circle cx="12" cy="8" r="2"/><rect x="6" y="2" width="16" height="16" rx="2"/></symbol>
+  <symbol id="wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></symbol>
+  <symbol id="users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+</svg>
 
-<div class="hero">
-  <div class="hero-t">
-    <span class="eyebrow">Студия дизайна интерьера · Алматы</span>
-    <h1>Интерьеры, в которых хочется жить</h1>
-    <p>Проект, 3D-визуализация, ремонт и авторский надзор — одна команда и один стандарт качества от эскиза до ключей.</p>
-    <div class="row"><a class="btn btn-acc" href="#calc">Рассчитать стоимость →</a><a class="btn btn-line" href="#projects">Смотреть проекты</a></div>
-    <div class="trust"><i></i>Бесплатная консультация в студии или онлайн</div>
-  </div>
-  <div class="hero-img"><img src="../assets/img/hero-interior.jpg" alt="Гостиная, проект в Атырау"><div class="tagc"><small>Флагманский проект</small><b>Квартира · Атырау, 70 м²</b><span>Минимализм · дизайн-проект + 3D</span></div></div>
-</div>
-
-<div class="stats"><div><b>10</b><span>лет на рынке</span></div><div><b>200 000+</b><span>м² реализовано</span></div><div><b>8</b><span>специалистов в команде</span></div><div><b>98%</b><span>довольных клиентов</span></div></div>
-
-<section id="projects"><div class="wrap">
-  <div class="head"><div><span class="eyebrow">Избранные проекты</span><h2>Работы, которые говорят за нас</h2></div><a class="btn btn-line" href="#">Все проекты →</a></div>
-  <div class="r1">
-    <a class="pc" href="#"><div class="im" style="height:600px"><img src="../assets/img/atyrau_kitchen.jpg" alt=""></div><div class="mt"><div><b>Квартира · Атырау</b><small>Жилое · Минимализм · 70 м²</small></div><em>→</em></div></a>
-    <div class="col">
-      <a class="pc" href="#"><div class="im" style="height:230px"><img src="../assets/img/portfolio_cafe_cafe-01.jpg" alt=""></div><div class="mt"><div><b>Кафе с арочными нишами</b><small>Коммерция · Hospitality</small></div><em>→</em></div></a>
-      <a class="pc" href="#"><div class="im" style="height:230px"><img src="../assets/img/portfolio_kv50_kv50-02.jpg" alt=""></div><div class="mt"><div><b>Квартира КВ50</b><small>Жилое · Минимализм</small></div><em>→</em></div></a>
+<header>
+  <div class="c hd">
+    <a class="logo" href="#"><img src="../assets/img/logo-icon.png" alt=""><span><b>Apelsin</b><small>Interior</small></span></a>
+    <nav class="main" id="nav"><a href="#services">Услуги</a><a href="#works">Портфолио</a><a href="#renovation">Ремонт</a><a href="#packages">Пакеты</a><a href="#calculator">Расчёт</a><a href="#team">Студия</a><a href="#contacts">Контакты</a></nav>
+    <div class="hd-r">
+      <a class="pill tel" href="tel:77770239748"><svg class="i"><use href="#phone"/></svg><span>+7 777 023 97 48</span></a>
+      <a class="cta-sm" href="#calculator">Рассчитать проект</a>
+      <button class="burger" type="button" id="burger" aria-label="Меню"><svg class="i"><use href="#menu"/></svg></button>
     </div>
   </div>
-  <div class="r2">
-    <a class="pc" href="#"><div class="im" style="height:300px"><img src="../assets/img/portfolio_kv43_kv43-01.jpg" alt=""></div><div class="mt"><div><b>Квартира КВ43</b><small>Жилое · Modern</small></div><em>→</em></div></a>
-    <a class="pc" href="#"><div class="im" style="height:300px"><img src="../assets/img/portfolio_studio_studio-02.jpg" alt=""></div><div class="mt"><div><b>Студия</b><small>Жилое · Modern</small></div><em>→</em></div></a>
-    <a class="pc" href="#"><div class="im" style="height:300px"><img src="../assets/img/portfolio_facade_facade-01.jpg" alt=""></div><div class="mt"><div><b>Фасад Özgeshe DAM</b><small>Фасад · Commercial</small></div><em>→</em></div></a>
+</header>
+<div class="mm" id="mm"><div class="mm-g"><a href="#services">Услуги</a><a href="#works">Портфолио</a><a href="#renovation">Ремонт</a><a href="#packages">Пакеты</a><a href="#calculator">Расчёт</a><a href="#team">Студия</a><a href="#contacts">Контакты</a></div><a class="btn-o" href="#calculator">Рассчитать проект</a></div>
+
+<main>
+  <!-- 1. Hero -->
+  <section class="hero"><div class="c">
+    <div class="rv">
+      <p class="eyebrow">APELSIN INTERIOR · Алматы</p>
+      <h1>Студия премиального дизайна интерьера с реализацией под ключ</h1>
+      <p class="lead">Apelsin — студия полного цикла из Алматы. Проект, визуализация, ремонт и авторский надзор — одна команда, один стандарт качества по всему Казахстану.</p>
+      <div class="hero-b"><a class="btn-o" href="#calculator">Рассчитать проект <svg class="i"><use href="#arrow-right"/></svg></a><a class="btn-l" href="#works">Смотреть работы</a></div>
+      <div class="trust"><span><svg class="i"><use href="#check"/></svg>Бесплатная консультация</span><span><svg class="i"><use href="#check"/></svg>Ответим в течение часа</span><span><svg class="i"><use href="#check"/></svg>Гарантия 3 года</span></div>
+    </div>
+    <div class="hero-im rv"><img src="../assets/img/hero-interior.jpg" alt="Гостиная — квартира в Атырау"><div class="hero-tag"><div><p class="kicker">Флагманский проект</p><b>Квартира · Атырау 70 м²</b><small>70,52 м² · Минимализм</small></div><a href="#flagship" aria-label="Смотреть проект"><svg class="i"><use href="#arrow-right"/></svg></a></div></div>
+  </div></section>
+
+  <!-- 2. Stats -->
+  <section class="sec" style="padding:48px 0 56px"><div class="c"><div class="stats rv">
+    <div class="warm"><b>10</b><span>Лет на рынке</span></div>
+    <div class="warm"><b>200000+</b><span>м² реализовано</span></div>
+    <div class="warm"><b>8</b><span>Специалистов</span></div>
+    <div class="warm"><b>98%</b><span>Довольных клиентов</span></div>
+  </div></div></section>
+
+  <!-- 3. Services -->
+  <section class="sec" id="services"><div class="c">
+    <div class="sh rv"><div><p class="eyebrow">Услуги</p><h2 class="h2">Полный цикл — от идеи до ключей</h2><p class="lead">Шесть направлений, объединённых одной командой. Без посредников, без потерь смысла между этапами.</p></div></div>
+    <div class="svc">
+      <article class="panel rv"><span class="ico"><svg class="i"><use href="#layers"/></svg></span><h3>Дизайн интерьера</h3><p>Жилые и коммерческие пространства с продуманной эргономикой и эстетикой.</p></article>
+      <article class="panel rv"><span class="ico"><svg class="i"><use href="#building"/></svg></span><h3>Дизайн экстерьера</h3><p>Архитектурные решения для частных домов, фасадов и ландшафта.</p></article>
+      <article class="panel rv"><span class="ico"><svg class="i"><use href="#hammer"/></svg></span><h3>Ремонт под ключ</h3><p>Полный цикл — от демонтажа до расстановки мебели и декора.</p></article>
+      <article class="panel rv"><span class="ico"><svg class="i"><use href="#cube"/></svg></span><h3>3D визуализация</h3><p>Фотореалистичные визуализации для согласования до начала работ.</p></article>
+      <article class="panel rv"><span class="ico"><svg class="i"><use href="#pen"/></svg></span><h3>Авторский надзор</h3><p>Контроль реализации на площадке — соответствие проекту и качеству.</p></article>
+      <article class="panel rv"><span class="ico"><svg class="i"><use href="#bulb"/></svg></span><h3>Световой дизайн</h3><p>Сценарии освещения, которые работают днём и вечером.</p></article>
+    </div>
+    <div class="center"><a class="btn-o" href="#calculator">Рассчитать стоимость <svg class="i"><use href="#arrow-right"/></svg></a></div>
+  </div></section>
+
+  <!-- 4. Portfolio -->
+  <section class="sec" id="works"><div class="c">
+    <div class="sh rv"><div><p class="eyebrow">Портфолио</p><h2 class="h2">Дизайн интерьера в Алматы — избранные проекты</h2><p class="lead">Визуализации, чертежи и реализованные интерьеры — без слов, на примерах.</p></div>
+      <div class="chips" id="chips"><button class="on" data-f="all">Все</button><button data-f="flat">Квартиры</button><button data-f="cafe">Кафе</button><button data-f="com">Коммерция</button></div></div>
+    <div class="cards" id="cards">
+      <a class="card rv" data-c="flat" href="#flagship"><div class="card-im"><img src="../assets/img/atyrau_living-room.jpg" alt="Квартира · Атырау 70 м²"><span class="t3d"><svg class="i"><use href="#scan"/></svg>3D-тур</span><div class="cap"><div><b>Квартира · Атырау 70 м²</b><span>70,52 м² · Минимализм</span></div><em><svg class="i"><use href="#arrow-right"/></svg></em></div></div></a>
+      <a class="card rv" data-c="cafe com" href="#"><div class="card-im"><img src="../assets/img/portfolio_cafe_cafe-01.jpg" alt="Кафе с арочными нишами"><span class="t3d"><svg class="i"><use href="#scan"/></svg>3D-тур</span><div class="cap"><div><b>Кафе с арочными нишами</b><span>коммерция · Hospitality</span></div><em><svg class="i"><use href="#arrow-right"/></svg></em></div></div></a>
+      <a class="card rv" data-c="flat" href="#"><div class="card-im"><img src="../assets/img/portfolio_kv50_kv50-02.jpg" alt="Квартира КВ50"><div class="cap"><div><b>Квартира КВ50</b><span>квартира · Минимализм</span></div><em><svg class="i"><use href="#arrow-right"/></svg></em></div></div></a>
+      <a class="card rv" data-c="flat" href="#"><div class="card-im"><img src="../assets/img/portfolio_kv43_kv43-01.jpg" alt="Квартира КВ43"><div class="cap"><div><b>Квартира КВ43</b><span>квартира · Modern</span></div><em><svg class="i"><use href="#arrow-right"/></svg></em></div></div></a>
+      <a class="card rv" data-c="flat" href="#"><div class="card-im"><img src="../assets/img/portfolio_studio_studio-02.jpg" alt="Студия"><div class="cap"><div><b>Студия</b><span>студия · Modern</span></div><em><svg class="i"><use href="#arrow-right"/></svg></em></div></div></a>
+      <a class="card rv" data-c="com" href="#"><div class="card-im"><img src="../assets/img/portfolio_facade_facade-01.jpg" alt="Фасад и вывеска Özgeshe DAM"><div class="cap"><div><b>Фасад и вывеска Özgeshe DAM</b><span>фасад · Commercial</span></div><em><svg class="i"><use href="#arrow-right"/></svg></em></div></div></a>
+    </div>
+  </div></section>
+
+  <!-- 5. Flagship project + drawings album -->
+  <section class="sec" id="flagship"><div class="c">
+    <div class="flag">
+      <div class="flag-l rv">
+        <div class="gm"><img id="gm" src="../assets/img/atyrau_living-room.jpg" alt="Гостиная"></div>
+        <div class="th" id="th">
+          <button class="on" data-s="atyrau_living-room"><img src="../assets/img/atyrau_living-room.jpg" alt="Гостиная"></button>
+          <button data-s="atyrau_kitchen"><img src="../assets/img/atyrau_kitchen.jpg" alt="Кухня"></button>
+          <button data-s="atyrau_hallway"><img src="../assets/img/atyrau_hallway.jpg" alt="Прихожая"></button>
+          <button data-s="atyrau_bedroom"><img src="../assets/img/atyrau_bedroom.jpg" alt="Спальня"></button>
+          <button data-s="atyrau_balcony"><img src="../assets/img/atyrau_balcony.jpg" alt="Лоджия"></button>
+        </div>
+      </div>
+      <div class="flag-r rv">
+        <p class="kicker">Флагманский проект</p>
+        <h3>Квартира · Атырау 70 м²</h3>
+        <p>Единый дизайн-проект квартиры: альбом чертежей + связанные PDF по зонам (гостиная, кухня, спальня, санузел, гардероб, прихожая) и 3D-визуализации.</p>
+        <div class="spec panel"><div><span>Город</span><b>Атырау</b></div><div><span>Площадь</span><b>70,52 м²</b></div><div><span>Стиль</span><b>Минимализм</b></div><div><span>Документация</span><b>27 листов + PDF по зонам</b></div></div>
+        <div class="flag-b"><button class="tour" type="button"><svg class="i"><use href="#scan"/></svg>3D-прогулка</button><button class="btn-o" type="button" id="openAlbum">Открыть альбом</button></div>
+      </div>
+    </div>
+    <div class="album panel rv"><div class="album-t"><p class="kicker">Документация проекта</p><b>Чертежи и листы альбома</b><span>Планировки, развёртки стен, узлы и спецификации</span></div><div class="strip" id="strip"></div></div>
+  </div></section>
+
+  <!-- 6. Renovation -->
+  <section class="sec" id="renovation"><div class="c">
+    <div class="ren">
+      <div class="rv">
+        <p class="eyebrow">Ремонт</p><h2 class="h2">Ремонт под ключ</h2>
+        <p class="lead">Собственная бригада, прозрачные сметы и фотоотчёты. Один договор — одна ответственность.</p>
+        <div class="guar">
+          <div class="panel"><b>01</b><h4>Своя бригада</h4><p>Специалисты в фирменной форме. Без субподряда.</p></div>
+          <div class="panel"><b>02</b><h4>Прозрачная смета</h4><p>Онлайн-доступ к расходам и фотоотчётам в реальном времени.</p></div>
+          <div class="panel"><b>03</b><h4>Контроль качества</h4><p>Проверка по чек-листу на каждом этапе работ.</p></div>
+          <div class="panel"><b>04</b><h4>Гарантия 3 года</h4><p>На все выполненные строительные и инженерные работы.</p></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="ba-tabs chips" id="baTabs"><button class="on" data-a="renovation_living-after" data-b="renovation_living-before">Гостиная · минимализм</button><button data-a="renovation_bathroom-after" data-b="renovation_bathroom-before">Санузел</button></div>
+        <div class="ba" id="ba"><img id="baAfter" src="../assets/img/renovation_living-after.jpg" alt="После"><img id="baBefore" class="before" src="../assets/img/renovation_living-before.jpg" alt="До"><span class="ba-l" style="left:12px">До</span><span class="ba-l" style="right:12px">После</span><div class="ba-h"><span><svg class="i"><use href="#arrows-h"/></svg></span></div></div>
+        <p class="ba-hint">Тяните влево / вправо</p>
+      </div>
+    </div>
+    <div class="dirs">
+      <div class="panel rv"><svg class="i"><use href="#check"/></svg>Демонтажные работы</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Подготовка поверхностей</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Электромонтаж</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Сантехника</div>
+      <div class="panel rv"><svg class="i"><use href="#check"/></svg>Вентиляция и кондиционирование</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Smart Home системы</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Малярные работы</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Укладка плитки</div>
+      <div class="panel rv"><svg class="i"><use href="#check"/></svg>Напольные покрытия</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Сборка и установка мебели</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Декорирование</div><div class="panel rv"><svg class="i"><use href="#check"/></svg>Свет и сценарии</div>
+    </div>
+  </div></section>
+
+  <!-- 7. Packages -->
+  <section class="sec" id="packages"><div class="c">
+    <div class="sh rv"><div><p class="eyebrow">Пакеты</p><h2 class="h2">Прозрачные тарифы. Без сюрпризов.</h2><p class="lead">Четыре готовых пакета и одна возможность собрать индивидуальный.</p></div></div>
+    <div class="pks">
+      <div class="pk rv"><p class="kicker">Стандарт</p><div class="price"><b>1 700</b><span>₸ / м²</span></div><span class="term">Срок: 5–10 дней</span><ul><li><svg class="i"><use href="#check"/></svg>Планировочное решение</li><li><svg class="i"><use href="#check"/></svg>Расстановка мебели</li><li><svg class="i"><use href="#check"/></svg>Цветовая палитра</li><li><svg class="i"><use href="#check"/></svg>Спецификация материалов</li></ul><div class="pick"><a href="#calculator" data-pkg="1700">Выбрать пакет</a></div></div>
+      <div class="pk rv"><p class="kicker">Индивидуальный</p><div class="price"><b>3 500</b><span>₸ / м²</span></div><span class="term">Срок: 10–20 дней</span><ul><li><svg class="i"><use href="#check"/></svg>Всё из «Стандарт»</li><li><svg class="i"><use href="#check"/></svg>3D визуализация</li><li><svg class="i"><use href="#check"/></svg>Подбор материалов</li><li><svg class="i"><use href="#check"/></svg>Электрика и сантехника</li></ul><div class="pick"><a href="#calculator" data-pkg="3500">Выбрать пакет</a></div></div>
+      <div class="pk hot rv"><span class="pop"><svg class="i"><use href="#star"/></svg>Популярный</span><p class="kicker">Бизнес</p><div class="price"><b>8 000</b><span>₸ / м²</span></div><span class="term">Срок: 20–30 дней</span><ul><li><svg class="i"><use href="#check"/></svg>Полный дизайн-проект</li><li><svg class="i"><use href="#check"/></svg>Комплект чертежей</li><li><svg class="i"><use href="#check"/></svg>Авторский надзор</li><li><svg class="i"><use href="#check"/></svg>Подбор подрядчиков</li></ul><div class="pick"><a href="#calculator" data-pkg="8000">Выбрать пакет</a></div></div>
+      <div class="pk rv"><p class="kicker">Премиум</p><div class="price"><b>20 000</b><span>₸ / м²</span></div><span class="term">Срок: 30+ дней</span><ul><li><svg class="i"><use href="#check"/></svg>Эксклюзивный проект</li><li><svg class="i"><use href="#check"/></svg>Дизайнерская мебель</li><li><svg class="i"><use href="#check"/></svg>Smart Home интеграция</li><li><svg class="i"><use href="#check"/></svg>Полное сопровождение</li><li><svg class="i"><use href="#check"/></svg>Световой дизайн</li></ul><div class="pick"><a href="#calculator" data-pkg="20000">Выбрать пакет</a></div></div>
+    </div>
+    <div class="custom warm rv"><div><p class="eyebrow">Custom</p><h3>Индивидуальный пакет</h3><p>Соберите услуги под свой проект. Платите только за нужное.</p></div><a class="btn-o" href="#contacts">Собрать пакет <svg class="i"><use href="#arrow-right"/></svg></a></div>
+  </div></section>
+
+  <!-- 8. Calculator -->
+  <section class="sec" id="calculator"><div class="c">
+    <div class="sh rv"><div><p class="eyebrow">Калькулятор</p><h2 class="h2">Расчёт стоимости</h2><p class="lead">Три шага — ориентировочная смета дизайн-проекта. Точную стоимость рассчитаем после замера.</p></div></div>
+    <div class="calc">
+      <div class="calc-l panel rv">
+        <div class="steps"><i class="on"></i><i></i><i></i></div>
+        <div class="step on" data-step="0"><p class="kicker">Шаг 1 из 3</p><h3>Тип объекта</h3><div class="opts" data-k="type"><button class="opt" data-v="Жилое"><b>Жилое</b><span>Квартира, дом, апартаменты</span></button><button class="opt" data-v="Коммерческое"><b>Коммерческое</b><span>Кафе, офис, магазин, фасад</span></button></div></div>
+        <div class="step" data-step="1"><p class="kicker">Шаг 2 из 3</p><h3>Площадь объекта</h3><div class="area"><output id="areaOut">70 <small>м²</small></output><input type="range" id="area" min="20" max="500" step="5" value="70" aria-label="Площадь"><div class="scale"><span>20 м²</span><span>500 м²</span></div></div></div>
+        <div class="step" data-step="2"><p class="kicker">Шаг 3 из 3</p><h3>Пакет</h3><div class="opts four" data-k="pkg"><button class="opt" data-v="1700" data-n="Стандарт"><b>Стандарт</b><span>1 700 ₸ / м² · 5–10 дней</span></button><button class="opt" data-v="3500" data-n="Индивидуальный"><b>Индивидуальный</b><span>3 500 ₸ / м² · 10–20 дней</span></button><button class="opt" data-v="8000" data-n="Бизнес"><b>Бизнес</b><span>8 000 ₸ / м² · 20–30 дней</span></button><button class="opt" data-v="20000" data-n="Премиум"><b>Премиум</b><span>20 000 ₸ / м² · 30+ дней</span></button></div></div>
+        <div class="calc-nav"><button class="btn-l" type="button" id="back"><svg class="i"><use href="#arrow-left"/></svg>Назад</button><button class="btn-o" type="button" id="fwd">Далее <svg class="i"><use href="#arrow-right"/></svg></button></div>
+      </div>
+      <aside class="calc-r rv"><div class="sum panel"><p class="kicker">Предварительный итог</p>
+        <dl><div><dt>Тип объекта</dt><dd id="sType">—</dd></div><div><dt>Площадь</dt><dd id="sArea">70 м²</dd></div><div><dt>Пакет</dt><dd id="sPkg">—</dd></div></dl>
+        <div class="tot"><span>Дизайн-проект, ориентировочно</span><b id="sTot">—</b></div>
+        <a class="btn-o" href="#contacts" id="sendCalc">Обсудить проект <svg class="i"><use href="#arrow-right"/></svg></a>
+        <small>Расчёт по ценам пакетов за м². Окончательная смета — после замера и брифа.</small></div></aside>
+    </div>
+  </div></section>
+
+  <!-- 9. Team + philosophy -->
+  <section class="sec" id="team"><div class="c">
+    <div class="sh rv"><div><p class="eyebrow">Команда</p><h2 class="h2">8 человек, одна студия</h2><p class="lead">Архитекторы, дизайнеры, визуализаторы и строители — единый стандарт качества на каждом проекте.</p></div></div>
+    <div class="team">
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-1.jpg" alt="Айгуль Нурланова"></div><figcaption><span>Главный архитектор</span><b>Айгуль Нурланова</b></figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-2.jpg" alt="Дамир Сейтов"></div><figcaption><span>Арт-директор</span><b>Дамир Сейтов</b></figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-3.jpg" alt="Алина Касымова"></div><figcaption><span>Дизайнер интерьера</span><b>Алина Касымова</b></figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-4.jpg" alt="Ерлан Бекетов"></div><figcaption><span>3D-визуализатор</span><b>Ерлан Бекетов</b></figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-5.jpg" alt="Мадина Жумабаева"></div><figcaption><span>Конструктор</span><b>Мадина Жумабаева</b></figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-6.jpg" alt="Нуржан Омаров"></div><figcaption><span>Прораб</span><b>Нуржан Омаров</b></figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-7.jpg" alt="Диана Алиева"></div><figcaption><span>Менеджер проекта</span><b>Диана Алиева</b></figcaption></figure>
+      <figure class="rv"><div class="ph"><img src="../assets/img/team_member-8.jpg" alt="Арман Тлеуберген"></div><figcaption><span>Светотехник</span><b>Арман Тлеуберген</b></figcaption></figure>
+    </div>
+    <div class="phil">
+      <div class="phil-im rv"><img src="../assets/img/atyrau_bedroom.jpg" alt="Apelsin Interior"></div>
+      <div class="phil-t">
+        <div class="rv"><p class="eyebrow">Философия</p><h3>Меньше, но точнее</h3><p>Мы не гонимся за трендами. Ищем решения, которые останутся с вами на годы — функциональные, тёплые и тихие.</p></div>
+        <div class="rv"><p class="eyebrow">Миссия</p><h3>Поднимать стандарт</h3><p>Делать премиальный дизайн доступным языком. Без снобизма, без шоу, без скрытых смет.</p></div>
+        <div class="rv"><p class="eyebrow">Культура</p><h3>Команда как семья</h3><p>Общие ценности, прозрачные процессы. Заказчик видит каждый шаг — от эскиза до сдачи объекта.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- 10. Contacts -->
+  <section class="sec" id="contacts"><div class="c">
+    <div class="sh rv"><div><p class="eyebrow">Контакты</p><h2 class="h2">Расскажите о вашем проекте</h2><p class="lead">Ответим в течение часа в рабочее время. Бесплатная консультация — в студии или онлайн.</p></div></div>
+    <div class="ct">
+      <form class="form panel rv" id="wa">
+        <label><span>Имя *</span><input class="field" name="n" required autocomplete="name"></label>
+        <div class="row2"><label><span>Телефон *</span><input class="field" name="p" type="tel" required autocomplete="tel"></label><label><span>Email (необязательно)</span><input class="field" name="e" type="email" autocomplete="email"></label></div>
+        <label><span>О проекте *</span><textarea class="field" name="m" required></textarea></label>
+        <button class="btn-o" type="submit">Отправить в WhatsApp <svg class="i"><use href="#arrow-right"/></svg></button>
+        <p class="note">Заявка откроется в WhatsApp. Отправляя форму, вы принимаете <a href="#">Политику конфиденциальности</a>.</p>
+      </form>
+      <div class="ct-r">
+        <a class="ci panel rv" href="tel:77770239748"><span class="ico"><svg class="i"><use href="#phone"/></svg></span><div><small>Телефон</small><b>+7 777 023 97 48</b></div></a>
+        <a class="ci panel rv" href="mailto:hello@apelsin.design"><span class="ico"><svg class="i"><use href="#mail"/></svg></span><div><small>Email</small><b>hello@apelsin.design</b></div></a>
+        <div class="socs rv"><a class="panel" href="https://www.instagram.com/apelsin.interior"><svg class="i"><use href="#ig"/></svg>Instagram</a><a class="panel" href="https://t.me/APELSIN_DESIGN_STUDIO"><svg class="i"><use href="#send"/></svg>Telegram</a><a class="panel" href="https://wa.me/77770239748"><svg class="i"><use href="#msg"/></svg>WhatsApp</a></div>
+        <div class="ci panel rv"><span class="ico"><svg class="i"><use href="#pin"/></svg></span><div><small>Адрес студии</small><b>Алматы, ул. Абая 150</b><em>Пн–Сб · 10:00 – 20:00</em></div></div>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<footer>
+  <div class="c ft">
+    <div class="ft-brand"><a class="logo" href="#"><img src="../assets/img/logo-icon.png" alt=""><span><b>Apelsin</b><small>Interior</small></span></a>
+      <h2>Контакты студии дизайна интерьера</h2>
+      <p>Студия премиального дизайна интерьера с реализацией под ключ. Создаём пространства, в которых хочется жить и работать.</p>
+      <div class="soc"><a href="https://www.instagram.com/apelsin.interior" aria-label="Instagram"><svg class="i"><use href="#ig"/></svg></a><a href="https://t.me/APELSIN_DESIGN_STUDIO" aria-label="Telegram"><svg class="i"><use href="#send"/></svg></a><a href="https://wa.me/77770239748" aria-label="WhatsApp"><svg class="i"><use href="#msg"/></svg></a></div>
+    </div>
+    <div><h4>Навигация</h4><ul><li><a href="#works">Портфолио</a></li><li><a href="#services">Услуги</a></li><li><a href="#renovation">Ремонт</a></li><li><a href="#packages">Пакеты</a></li><li><a href="#calculator">Расчёт</a></li><li><a href="#team">Студия</a></li><li><a href="#contacts">Контакты</a></li></ul></div>
+    <div><h4>Контакты</h4><ul><li><a href="tel:77770239748">+7 777 023 97 48</a></li><li><a href="mailto:hello@apelsin.design">hello@apelsin.design</a></li><li>Алматы, ул. Абая 150</li><li>Пн–Сб · 10:00 – 20:00</li></ul></div>
   </div>
-</div></section>
+  <div class="ft-b"><div class="c"><span>© 2026 APELSIN INTERIOR. Все права защищены.</span><div><a href="#">Политика конфиденциальности</a><span>Almaty, Kazakhstan</span></div></div></div>
+</footer>
 
-<section class="svc" id="services"><div class="wrap">
-  <div class="svc-l"><span class="eyebrow">Услуги</span><h2>Полный цикл — от идеи до ключей</h2><p>Шесть направлений, объединённых одной командой. Без посредников и без потерь смысла между этапами.</p><div><a class="btn btn-ink" href="#calc">Рассчитать проект</a></div></div>
-  <div>
-    <div class="srow"><i>01</i><div><b>Дизайн интерьера</b><p>Жилые и коммерческие пространства с продуманной эргономикой и эстетикой.</p></div></div>
-    <div class="srow"><i>02</i><div><b>Дизайн экстерьера</b><p>Архитектурные решения для частных домов, фасадов и ландшафта.</p></div></div>
-    <div class="srow"><i>03</i><div><b>Ремонт под ключ</b><p>Полный цикл — от демонтажа до расстановки мебели и декора.</p></div></div>
-    <div class="srow"><i>04</i><div><b>3D-визуализация</b><p>Фотореалистичные визуализации для согласования до начала работ.</p></div></div>
-    <div class="srow"><i>05</i><div><b>Авторский надзор</b><p>Контроль реализации на площадке — соответствие проекту и качеству.</p></div></div>
-    <div class="srow"><i>06</i><div><b>Световой дизайн</b><p>Сценарии освещения, которые работают днём и вечером.</p></div></div>
-  </div>
-</div></section>
+<a class="wa" href="https://wa.me/77770239748" aria-label="Написать в WhatsApp"><svg class="i"><use href="#msg"/></svg></a>
+<nav class="tabbar"><ul>
+  <li><a class="on" href="#"><svg class="i"><use href="#house"/></svg>Главная</a></li><li><a href="#works"><svg class="i"><use href="#images"/></svg>Работы</a></li><li><a href="#renovation"><svg class="i"><use href="#wrench"/></svg>Ремонт</a></li><li><a href="#calculator"><svg class="i"><use href="#calc"/></svg>Смета</a></li><li><a href="#team"><svg class="i"><use href="#users"/></svg>Команда</a></li><li><a href="#contacts"><svg class="i"><use href="#msg"/></svg>Связь</a></li>
+</ul></nav>
 
-<section id="process"><div class="wrap">
-  <div class="head"><div><span class="eyebrow">Как мы работаем</span><h2>Пять шагов к готовому интерьеру</h2></div></div>
-  <div class="steps">
-    <div class="step"><small>Шаг 1</small><b>Бриф и замер</b><p>Знакомимся, обсуждаем образ жизни, бюджет и сроки. Выезжаем на объект.</p></div>
-    <div class="step"><small>Шаг 2</small><b>Планировка</b><p>2–3 варианта планировочного решения и расстановки мебели.</p></div>
-    <div class="step"><small>Шаг 3</small><b>3D-визуализация</b><p>Фотореалистичные виды каждого помещения до начала работ.</p></div>
-    <div class="step"><small>Шаг 4</small><b>Рабочий альбом</b><p>Полный комплект чертежей и спецификаций для строителей.</p></div>
-    <div class="step"><small>Шаг 5</small><b>Реализация</b><p>Ремонт своей бригадой и авторский надзор до сдачи объекта.</p></div>
-  </div>
-</div></section>
+<div class="lb" id="lb" role="dialog" aria-label="Альбом чертежей"><button class="lb-x" type="button" id="lbX" aria-label="Закрыть"><svg class="i"><use href="#close"/></svg></button><button class="lb-p" type="button" id="lbP" aria-label="Назад"><svg class="i"><use href="#chev-left"/></svg></button><img id="lbImg" alt=""><button class="lb-n" type="button" id="lbN" aria-label="Далее"><svg class="i"><use href="#chev-right"/></svg></button><span class="lb-c" id="lbC"></span></div>
 
-<section class="ren" id="renovation"><div class="wrap">
-  <img src="../assets/img/renovation_living-after.jpg" alt="Гостиная после ремонта">
-  <div><span class="eyebrow">Ремонт под ключ</span><h2>Своя бригада. Один договор — одна ответственность</h2>
-    <ul class="chk"><li>Специалисты в фирменной форме, без субподряда</li><li>Прозрачная смета и фотоотчёты онлайн</li><li>Проверка по чек-листу на каждом этапе</li><li>Гарантия 3 года на все работы</li></ul>
-    <a class="btn btn-ink" href="#contact">Заказать ремонт</a></div>
-</div></section>
-
-<section id="packages"><div class="wrap">
-  <div class="pk-h"><span class="eyebrow">Пакеты и цены</span><h2>Прозрачные тарифы. Без сюрпризов</h2><p>Стоимость за м² дизайн-проекта. Точную смету рассчитаем после замера.</p></div>
-  <div class="pks">
-    <div class="pk"><div class="top"><b>Стандарт</b></div><div class="price"><b>1 700</b><span>₸ / м²</span></div><div class="term">Срок: 5–10 дней</div><hr><ul><li>Планировочное решение</li><li>Расстановка мебели</li><li>Цветовая палитра</li><li>Спецификация материалов</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
-    <div class="pk"><div class="top"><b>Индивидуальный</b></div><div class="price"><b>3 500</b><span>₸ / м²</span></div><div class="term">Срок: 10–20 дней</div><hr><ul><li>Всё из «Стандарт»</li><li>3D-визуализация</li><li>Подбор материалов</li><li>Электрика и сантехника</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
-    <div class="pk hot"><div class="top"><b>Бизнес</b><span class="badge">Популярный</span></div><div class="price"><b>8 000</b><span>₸ / м²</span></div><div class="term">Срок: 20–30 дней</div><hr><ul><li>Полный дизайн-проект</li><li>Комплект чертежей</li><li>Авторский надзор</li><li>Подбор подрядчиков</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
-    <div class="pk"><div class="top"><b>Премиум</b></div><div class="price"><b>20 000</b><span>₸ / м²</span></div><div class="term">Срок: от 30 дней</div><hr><ul><li>Эксклюзивный проект</li><li>Дизайнерская мебель</li><li>Smart Home интеграция</li><li>Световой дизайн</li></ul><a class="btn btn-line" href="#contact">Выбрать пакет</a></div>
-  </div>
-</div></section>
-
-<div class="cta" id="calc"><div class="wrap"><div><span class="eyebrow">Калькулятор</span><h2>Узнайте стоимость проекта за 2 минуты</h2><p>7 простых шагов — и ориентировочная смета у вас на экране.</p></div><a class="btn btn-acc" href="#contact">Рассчитать стоимость →</a></div></div>
-
-<section class="ct" id="contact"><div class="wrap">
-  <div class="ct-l"><span class="eyebrow">Контакты</span><h2>Расскажите о вашем проекте</h2><p>Ответим в течение часа в рабочее время. Бесплатная консультация — в студии или онлайн.</p>
-    <div class="info"><div><small>Телефон</small><b>+7 777 023 97 48</b></div><div><small>Email</small><b>hello@apelsin.design</b></div><div><small>Адрес</small><b>Алматы, ул. Абая 150</b></div><div><small>Режим работы</small><b>Пн–Сб · 10:00 – 20:00</b></div></div></div>
-  <form id="wa">
-    <label>Имя *<input name="n" required placeholder="Как к вам обращаться"></label>
-    <label>Телефон *<input name="p" required placeholder="+7 (___) ___-__-__"></label>
-    <label>Email<input name="e" placeholder="необязательно"></label>
-    <label>О проекте *<textarea name="m" required placeholder="Тип объекта, площадь, пожелания…"></textarea></label>
-    <button class="btn btn-acc" type="submit">Отправить в WhatsApp</button>
-    <small>Отправляя форму, вы принимаете политику конфиденциальности.</small>
-  </form>
-</div></section>
-
-<footer><div class="wrap">
-  <div class="ft"><div><span class="logo"><img src="../assets/img/logo-icon.png" alt=""><span><b>APELSIN</b><small>INTERIOR</small></span></span><p>Студия премиального дизайна интерьера с реализацией под ключ. Создаём пространства, в которых хочется жить и работать.</p></div>
-    <ul><li>Навигация</li><li>Портфолио</li><li>Услуги</li><li>Ремонт</li><li>Пакеты</li><li>Калькулятор</li></ul>
-    <ul><li>Студия</li><li>О нас</li><li>Команда</li><li>Вакансии</li><li>Контакты</li></ul>
-    <ul><li>Соцсети</li><li>Instagram</li><li>Telegram</li><li>WhatsApp</li></ul></div>
-  <div class="ft-b"><span>© 2026 APELSIN INTERIOR. Все права защищены.</span><span>Политика конфиденциальности</span></div>
-</div></footer>
+<script>
+var $=function(id){return document.getElementById(id)};
+// reveal on scroll
+(function(){var els=[].slice.call(document.querySelectorAll('.rv'));function chk(){var h=innerHeight*.94;els=els.filter(function(el){if(el.getBoundingClientRect().top<h){el.classList.add('in');return false}return true})}addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk);chk();setTimeout(chk,300)})();
+// burger
+(function(){var b=$('burger'),m=$('mm');b.onclick=function(){var o=m.classList.toggle('open');b.innerHTML='<svg class="i"><use href="#'+(o?'close':'menu')+'"/></svg>'};m.onclick=function(e){if(e.target.closest('a')){m.classList.remove('open');b.innerHTML='<svg class="i"><use href="#menu"/></svg>'}}})();
+// active nav item while scrolling
+(function(){var links=[].slice.call(document.querySelectorAll('#nav a'));function spy(){var cur='';links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<140)cur=a});links.forEach(function(a){a.classList.toggle('on',a===cur)})}addEventListener('scroll',spy,{passive:true});spy()})();
+// portfolio filter
+$('chips').onclick=function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});var f=b.dataset.f;document.querySelectorAll('#cards .card').forEach(function(c){c.classList.toggle('hide',f!=='all'&&c.dataset.c.split(' ').indexOf(f)<0)})};
+// flagship gallery
+$('th').onclick=function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});var g=$('gm');g.style.opacity=0;setTimeout(function(){g.src='../assets/img/'+b.dataset.s+'.jpg';g.style.opacity=1},150)};
+// album strip + lightbox
+(function(){var N=27,i=0,p=function(n){return String(n).padStart(3,'0')},s=$('strip');for(var k=0;k<N;k++)s.insertAdjacentHTML('beforeend','<button type="button" data-i="'+k+'" aria-label="Лист '+(k+1)+'"><img loading="lazy" src="../assets/img/drawings/'+p(k+1)+'.jpg" alt=""></button>');
+function show(n){i=(n+N)%N;$('lbImg').src='../assets/img/drawings/'+p(i+1)+'.jpg';$('lbC').textContent='Лист '+(i+1)+' / '+N}
+function open(n){show(n);$('lb').classList.add('open');document.body.style.overflow='hidden'}function close(){$('lb').classList.remove('open');document.body.style.overflow=''}
+s.onclick=function(e){var b=e.target.closest('button');if(b)open(+b.dataset.i)};$('openAlbum').onclick=function(){open(0)};$('lbX').onclick=close;$('lbP').onclick=function(){show(i-1)};$('lbN').onclick=function(){show(i+1)};
+$('lb').onclick=function(e){if(e.target===this)close()};document.addEventListener('keydown',function(e){if(!$('lb').classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)})})();
+// before/after slider
+(function(){var ba=$('ba'),drag=false;function set(x){var r=ba.getBoundingClientRect();var v=Math.max(0,Math.min(100,(x-r.left)/r.width*100));ba.style.setProperty('--x',v+'%')}
+ba.addEventListener('pointerdown',function(e){drag=true;ba.setPointerCapture(e.pointerId);set(e.clientX)});ba.addEventListener('pointermove',function(e){if(drag)set(e.clientX)});ba.addEventListener('pointerup',function(){drag=false});
+$('baTabs').onclick=function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});$('baAfter').src='../assets/img/'+b.dataset.a+'.jpg';$('baBefore').src='../assets/img/'+b.dataset.b+'.jpg';ba.style.setProperty('--x','50%')}})();
+// calculator
+(function(){var st=0,S={type:null,area:70,pkg:null,name:null},steps=document.querySelectorAll('.step'),bars=document.querySelectorAll('.steps i');
+function fmt(n){return n.toLocaleString('ru-RU')+' ₸'}
+function render(){steps.forEach(function(s,k){s.classList.toggle('on',k===st)});bars.forEach(function(b,k){b.classList.toggle('on',k<=st)});$('back').disabled=st===0;var ok=(st===0&&S.type)||st===1||(st===2&&S.pkg);$('fwd').disabled=!ok;$('fwd').style.visibility=st===2?'hidden':'visible';
+$('sType').textContent=S.type||'—';$('sArea').textContent=S.area+' м²';$('sPkg').textContent=S.name||'—';$('sTot').textContent=S.pkg?fmt(S.area*S.pkg):'—'}
+document.querySelectorAll('.opts').forEach(function(g){g.onclick=function(e){var b=e.target.closest('.opt');if(!b)return;g.querySelectorAll('.opt').forEach(function(x){x.classList.toggle('on',x===b)});if(g.dataset.k==='type')S.type=b.dataset.v;else{S.pkg=+b.dataset.v;S.name=b.dataset.n}render()}});
+$('area').oninput=function(){S.area=+this.value;$('areaOut').innerHTML=S.area+' <small>м²</small>';render()};
+$('fwd').onclick=function(){if(st<2){st++;render()}};$('back').onclick=function(){if(st>0){st--;render()}};
+// "Выбрать пакет" preselects the package in the calculator
+document.querySelectorAll('[data-pkg]').forEach(function(a){a.addEventListener('click',function(){var o=document.querySelector('.opts[data-k="pkg"] .opt[data-v="'+a.dataset.pkg+'"]');if(o)o.click();if(!S.type){var t=document.querySelector('.opts[data-k="type"] .opt');t.click()}st=2;render()})});
+$('sendCalc').onclick=function(){if(S.pkg){var m=document.querySelector('#wa textarea');m.value='Расчёт: '+(S.type||'')+', '+S.area+' м², пакет «'+S.name+'» — ориентировочно '+fmt(S.area*S.pkg)+'.';}};
+render()})();
+</script>
 <script src="../assets/wa-form.js"></script>
 <script src="../assets/switcher.js"></script>
 </body>
